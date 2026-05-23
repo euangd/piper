@@ -75,8 +75,7 @@ let project = Project(
             ],
             dependencies: [
                 .target(name: sharedUtilsName, status: .required),
-                .target(name: ttsExtensionName, status: .required),
-                .external(name: "onnxruntime")
+                .target(name: ttsExtensionName, status: .required)
             ],
             settings: .settings(configurations:
                                     [
