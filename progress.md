@@ -150,4 +150,25 @@
 - `PiperApp/Sources/Flows/ImportVoice/ImportVoiceHostModel.swift`
 - `PiperApp/Sources/Flows/ImportVoice/ImportVoiceView.swift`
 
+## Session 8 (May 23, 2026)
+
+### Session 8 Done
+
+- Investigated the GitHub Actions archive failure from the iPhoneOS release build.
+- Identified the concrete Swift compile break in `PiperAppUtils/FileManager/FileManager.swift`:
+  - `Constants.supportedModelExtensions` was resolved as `FileManager.Constants`, not `PiperAppUtils.Constants`.
+- Fixed both failing references by explicitly qualifying:
+  - `PiperAppUtils.Constants.supportedModelExtensions`
+- Revalidated the updated file with diagnostics after the patch.
+
+### Session 8 Validation
+
+- `get_errors` reports **no errors** for `PiperAppUtils/FileManager/FileManager.swift` after the fix.
+- This directly addresses the explicit CI compiler errors shown in the archive log.
+
+### Session 8 Files Modified
+
+- `PiperAppUtils/FileManager/FileManager.swift`
+
+
 

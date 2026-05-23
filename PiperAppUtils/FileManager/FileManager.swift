@@ -81,11 +81,11 @@ extension FileManager {
                 .filter { !$0.isEmpty }
 
             if let found = findFile(matchingNameCandidates: candidateNames,
-                                    preferredExtensions: Constants.supportedModelExtensions) {
+                                    preferredExtensions: PiperAppUtils.Constants.supportedModelExtensions) {
                 return found
             }
 
-            return findFile(withExtensions: Constants.supportedModelExtensions)
+            return findFile(withExtensions: PiperAppUtils.Constants.supportedModelExtensions)
         }
 
         /// Find a file in the same model folder matching any of the provided name candidates or extensions.

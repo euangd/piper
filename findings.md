@@ -99,3 +99,13 @@ Text -> AVSpeechSynthesisProviderRequest -> PiperTTSAudioUnit -> piper-objc (C++
 - `FileManager.install(paths:)` created destination paths with the default `.piper` engine, so future non-Piper installs would lose their engine type unless installation preserved `paths.engine`.
 - Duplicate install detection also needed to include engine type; matching only `ModelInfo` could remove a Piper voice when installing a future non-Piper model with similar metadata.
 - The installed voices list used `info?.voiceId` as the SwiftUI identity, which is not unique across engines. The model URL is a safer row identity for installed model paths.
+
+## Session 8 Findings (CI Archive Failure)
+
+- The GitHub Actions archive failure was caused by a namespace collision inside `PiperAppUtils/FileManager/FileManager.swift`.
+- Inside `extension FileManager`, unqualified `Constants.supportedModelExtensions` resolves to `FileManager.Constants`, which does **not** define `supportedModelExtensions`.
+- The intended symbol lives in `PiperAppUtils.Constants.supportedModelExtensions`.
+- The archive log's hard failure lines:
+  - `type 'FileManager.Constants' has no member 'supportedModelExtensions'`
+  - exactly matched the two references in `ModelPaths.primaryModelURL`.
+- Explicitly qualifying those references with `PiperAppUtils.Constants` should unblock the `PiperAppUtils` Swift compile step in CI.
