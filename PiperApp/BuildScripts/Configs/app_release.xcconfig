@@ -1,0 +1,5 @@
+#include "release.xcconfig"
+#include "app_common.xcconfig"
+
+PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*] = Piper App Distr PP
+PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*] = Piper Mac App Distr PP

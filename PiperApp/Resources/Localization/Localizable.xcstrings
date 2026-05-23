@@ -1,0 +1,2593 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "about_app" : {
+      "comment" : "A label for the \"About\" button in the main view.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "About the App"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "O aplikacji"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Uygulama Hakkında"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Про Додаток"
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ایپ کے بارے میں"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "关于应用程序"
+          }
+        }
+      }
+    },
+    "app_help_line_1" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Install a voice from **Download Voice Model** menu to start using the app."
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zainstaluj głos z menu **Pobierz model głosu**, aby rozpocząć korzystanie z aplikacji."
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Uygulamayı kullanmaya başlamak için **Ses Modelini İndir** menüsünden bir ses yükleyin."
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Встановіть голос за допомогою **Завантажити голосову модель**, щоб почати користуватися застосунком."
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ایپ کا استعمال شروع کرنے کے لیے **ڈاؤن لوڈ وائس ماڈل** مینو سے آواز انسٹال کریں۔"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "从 **Download Voice Model** 菜单安装语音以开始使用应用程序。"
+          }
+        }
+      }
+    },
+    "app_help_line_2_ios" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Go to **Settings → Accessibility → VoiceOver → Speech**."
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Przejdź do **Ustawienia → Dostępność → VoiceOver → Mowa**."
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "**Ayarlar → Erişilebilirlik → VoiceOver → Konuşma** bölümüne gidin."
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Перейдіть до **Налаштування → Доступність → VoiceOver → Мова**."
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "**ترتیبات → ایکسیسبیلٹی → وائس اوور → اسپیچ** پر جائیں۔"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "转到**设置 -> 可访问性 -> VoiceOver@@语音**。"
+          }
+        }
+      }
+    },
+    "app_help_line_2_macos" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Open **VoiceOver Utility → Speech**."
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Otwórz **VoiceOver Utility → Mowa**."
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "**VoiceOver Yardımcı Programı → Konuşma**'yı açın."
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Відкрийте **VoiceOver Utility → Мова**."
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "**VoiceOver Utility** ← **Speech** کھولیں"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "打开 **VoiceOuter 实用程序 → 语音** 。"
+          }
+        }
+      }
+    },
+    "app_help_line_3_ios" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tap **Add Rotor Voice**, find the voice you installed under **Piper**, and select it."
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Stuknij **Dodaj głos rotora**, znajdź głos zainstalowany w **Piper** i wybierz go."
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "**Rotor Sesini Ekle**'ye dokunun, yüklediğiniz sesi **Piper** altında bulun ve seçin."
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Натисніть **Додати голос ротора**, знайдіть встановлений голос у розділі **Piper** та виберіть його."
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "**Add Rotor Voice** پر ٹیپ کریں، **Piper** کے نیچے اپنی انسٹال کردہ آواز تلاش کریں، اور اسے منتخب کریں۔​\n\n"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "点击 **添加 Rotor Voice**，找到您在 **Piper** 下安装的语音，并选择它。"
+          }
+        }
+      }
+    },
+    "app_help_line_3_macos" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Click **Add**, then select the installed voice."
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kliknij **Dodaj**, a następnie wybierz zainstalowany głos."
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "**Ekle**'ye tıklayın, ardından yüklü sesi seçin."
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Клацніть **Додати**, потім виберіть встановлений голос."
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "**Add** پر کلک کریں، پھر انسٹال شدہ آواز کو منتخب کریں۔\n\n"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "点击 **添加**，然后选择已安装的语音。"
+          }
+        }
+      }
+    },
+    "app_help_line_4" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Use **Search** if the voice does not appear in the list."
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Użyj **Szukaj**, jeśli głos nie pojawia się na liście."
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ses listede görünmüyorsa **Ara**'yı kullanın."
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Використайте **Пошук**, якщо голос не відображається у списку."
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "اگر آواز فہرست میں ظاہر نہ ہو تو **Search** کا استعمال کریں۔​\n\n"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "如果语音没有出现在列表中，请使用 **搜索** 。"
+          }
+        }
+      }
+    },
+    "app_help_line_5" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Custom voices can be installed using **Import Model from Files** by selecting a `.onnx` model and its `.json` configuration."
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Własne głosy można zainstalować za pomocą **Importuj model z plików**, wybierając model `.onnx` i jego konfigurację `.json`."
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Özel sesler, bir `.onnx` modeli ve `.json` yapılandırmasını seçerek **Dosyalardan Model İçe Aktar** ile yüklenebilir."
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Користувальницькі голоси можуть бути встановлені за допомогою **Імпортувати з файлів**, обравши модель `.onnx` і її конфігурацію `.json`."
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "**Import Model from Files** کا استعمال کرتے ہوئے ایک .onnxماڈل اور اس کی.json کنفیگریشن کو منتخب کر کے کسٹم آوازیں انسٹال کی جا سکتی ہیں۔"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "通过选择`.onnx`模型及其`.json`配置，可以使用 **从文件中导入模型** 安装自定义语音。"
+          }
+        }
+      }
+    },
+    "app_help_title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Help"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pomoc"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Yardım"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Довідка"
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Help"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "帮助"
+          }
+        }
+      }
+    },
+    "app_version" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "App Version"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wersja aplikacji"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Uygulama Sürümü"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Версія програми"
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ایپکا ورژن"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "应用版本"
+          }
+        }
+      }
+    },
+    "app_voice_info" : {
+      "comment" : "A section header for displaying information about the app's voice capabilities.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Voice Information"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Informacje o głosach"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ses Bilgisi"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Інформація про голос"
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "\n\nآواز کی معلومات\n"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "语音信息"
+          }
+        }
+      }
+    },
+    "audio_unit_status" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Audio Unit Status"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Status jednostki audio"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ses Birimi Durumu"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Статус Audio Unit"
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "آڈیو یونٹ کی حیثیت"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "音频设备状态"
+          }
+        }
+      }
+    },
+    "audio_unit_status_connected" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Connected"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Połączono"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bağlı"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Підключено"
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "جڑا ہوا"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "已连接"
+          }
+        }
+      }
+    },
+    "audio_unit_status_disconnected" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Disconnected"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rozłączono"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bağlantı Kesildi"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Відключено"
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "منقطع"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "断开连接"
+          }
+        }
+      }
+    },
+    "audio_unit_status_failed" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Failed to Connect"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nie udało się połączyć"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bağlantı Başarısız"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Не вдалося підключитися"
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "مربوط ہونے میں ناکام"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "连接失败"
+          }
+        }
+      }
+    },
+    "cancel" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cancel"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Anuluj"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "İptal"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Скасувати"
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "منسوخ کریں۔"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "取消"
+          }
+        }
+      }
+    },
+    "connect" : {
+      "comment" : "A button label that says \"Connect\".",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Connect"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Połącz"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bağlan"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Підключитися"
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "جڑیں"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "连接"
+          }
+        }
+      }
+    },
+    "country" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Country"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kraj"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ülke"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Країна"
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ملک"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "国家"
+          }
+        }
+      }
+    },
+    "credits_and_legal" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Credits & Legal"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Autorzy i Licencje"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Katkılar & Yasal"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Автори та Ліцензії"
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "کریڈٹ اور لائسنس"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "学分与法律"
+          }
+        }
+      }
+    },
+    "download_voice" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Download Voice"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pobierz głos"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sesi İndir"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Завантажити голос"
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "آواز ڈاؤن لوڈ کریں۔"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "下载声音"
+          }
+        }
+      }
+    },
+    "download_voice_model" : {
+      "comment" : "A button label that downloads a voice model.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Download Voice Model"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pobierz model głosu"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ses Modelini İndir"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Завантажити голосову модель"
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "وائس ماڈل ڈاؤن لوڈ کریں۔"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "下载语音模型"
+          }
+        }
+      }
+    },
+    "downloaded" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Downloaded"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pobrano"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "İndirildi"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Завантажено"
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ڈاؤن لوڈ کیا گیا۔"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "已下载"
+          }
+        }
+      }
+    },
+    "downloading" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Downloading"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pobieranie"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "İndiriliyor"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Завантажується"
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ڈاؤن لوڈ ہو رہا ہے۔"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "正在下载"
+          }
+        }
+      }
+    },
+    "error" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Error"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pomyłka"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hata"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Помилка"
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "خرابی"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "错误"
+          }
+        }
+      }
+    },
+    "export_file" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Export File"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Eksportuj plik"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dosyayı Dışa Aktar"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Отримати запис"
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "فائل برآمد کریں۔"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "导出文件"
+          }
+        }
+      }
+    },
+    "installed_voices" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Installed Voices"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zainstalowane głosy"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Yüklenen Sesler"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Встановлені Голоси"
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "انسٹال شدہ آوازیں۔"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "已安装的声音"
+          }
+        }
+      }
+    },
+    "json_error_data_corrupted_%@" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The data is corrupted: %@"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dane są uszkodzone: %@"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Veriler bozulmuş: %@"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Дані пошкоджені: %@"
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ڈیٹا کرپٹ ہے: %@"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "数据已损坏：%@"
+          }
+        }
+      }
+    },
+    "json_error_invalid_model_file_path" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Invalid model file path."
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nieprawidłowa ścieżka do pliku modelu."
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Geçersiz model dosya yolu."
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Недійсний шлях до файлу моделі."
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "غلط ماڈل فائل پاتھ۔"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "模型文件路径无效。"
+          }
+        }
+      }
+    },
+    "json_error_missing_field_%@_at_%@" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The field ‘%@’ is missing at ‘%@’"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pole „%@” nie występuje w „%@”"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "‘%@’ alanı ‘%@’ konumunda eksik."
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Поле «%@» відсутнє у «%@»"
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "فیلڈ '%@' '%@' پر غائب ہے"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "字段“%@”在“%@”处缺失"
+          }
+        }
+      }
+    },
+    "json_error_type_mismatch_%@_at_%@" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Expected a value of type '%@' at '%@', but found something else."
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Oczekiwano wartości typu '%@' w '%@', ale znaleziono coś innego."
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "'%@' konumunda '%@' türünde bir değer bekleniyordu, ancak başka bir şey bulundu."
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Очікувалося значення типу '%@' у '%@', але знайдено щось інше."
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "'%@' پر '%@' قسم کی قدر کی توقع تھی، لیکن کچھ اور ملا۔"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "预期在“%@”处找到类型为“%@”的值，但找到的是其他类型。"
+          }
+        }
+      }
+    },
+    "json_error_value_not_found_%@_at_%@" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Required value of type '%@' was null at '%@'."
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wymagana wartość typu '%@' była równa null dla '%@'."
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "'%@' türündeki gerekli değer '%@' konumunda boştu."
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Необхідне значення типу '%@' було null у '%@'."
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "قسم '%@' کی مطلوبہ قدر '%@' پر کالعدم تھی۔"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "类型为“%@”的必需值为空。"
+          }
+        }
+      }
+    },
+    "language" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Language"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Język"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dil"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Мова"
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "زبان"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "语言"
+          }
+        }
+      }
+    },
+    "languages" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Languages"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Języki"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Diller"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Мови"
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "زبانیں"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "语文"
+          }
+        }
+      }
+    },
+    "license_audio_unit_description" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This Audio Unit Extension, which includes eSpeak-NG and Piper1-GPL, is licensed under GPLv3."
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "To rozszerzenie Audio Unit, które zawiera eSpeak-NG i Piper1-GPL, jest licencjonowane na GPLv3."
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "eSpeak-NG ve Piper1-GPL içeren bu Ses Birimi Eklentisi GPLv3 lisanslıdır."
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Цей Audio Unit Extension, що включає eSpeak-NG та Piper1-GPL, ліцензований за GPLv3."
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "یہ آڈیو یونٹ ایکسٹینشن، جس میں eSpeak-NG اور Piper1-GPL شامل ہیں، GPLv3 کے تحت  لائسنس یافتہ ہے۔"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "此音频单元扩展包括eSpeak-NG和 Piper1-GPL，它是GPLv3授权的。"
+          }
+        }
+      }
+    },
+    "license_audio_unit_title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Audio Unit Extension (GPLv3)"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rozszerzenie Audio Unit (GPLv3)"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ses Birimi Eklentisi (GPLv3)"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Audio Unit Extension (GPLv3)"
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ".آڈیو یونٹ ایکسٹینشن (GPLv3)"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "音频单元扩展 (GPLv3)"
+          }
+        }
+      }
+    },
+    "license_espeak_ng_description" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "eSpeak NG is a lightweight open-source text-to-speech engine supporting over 100 languages and accents."
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "eSpeak NG to lekki, otwartoźródłowy silnik TTS obsługujący ponad 100 języków i akcentów."
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "eSpeak NG, 100’den fazla dili ve aksanı destekleyen hafif açık kaynaklı bir metinden konuşmaya motorudur."
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "eSpeak NG - це швидкий механізм перетворення тексту в мовлення з відкритим кодом, який підтримує понад 100 мов та акцентів."
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "eSpeak NG ایک ہلکا پھلکا اوپن سورس ٹیکسٹ ٹو اسپیچ انجن ہے جو 100 سے زیادہ زبانوں اور لہجوں کو سپورٹ کرتا ہے۔"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "eSpeak NG 是一个轻量开源文字转语音引擎，支持100多种语言和音量。"
+          }
+        }
+      }
+    },
+    "license_main_app_%@_title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Piper %@ App (MIT)"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Piper %@ Aplikacja (MIT)"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Piper %@ Uygulaması (MIT)"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Piper %@ Додаток (MIT)"
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Piper %@ App (MIT)"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Piper %@ App (MIT)"
+          }
+        }
+      }
+    },
+    "license_main_app_description" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Piper App, developed by [Ihor Shevchuk](https://ihor-shevchuk.dev), is licensed under MIT. It is a separate program and communicates with the Audio Unit Extension only via XPC."
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aplikacja Piper, stworzona przez [Ihora Szewczuka](https://ihor-shevchuk.dev), jest licencjonowana na MIT. To osobny program, który komunikuje się z rozszerzeniem Audio Unit wyłącznie przez XPC."
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "[Ihor Shevchuk](https://ihor-shevchuk.dev) tarafından geliştirilen Piper Uygulaması MIT lisanslıdır. Bu ayrı bir programdır ve Ses Birimi Eklentisi ile yalnızca XPC üzerinden iletişim kurar."
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Додаток Piper, розроблений [Ігорем Шевчуком](https://ihor-shevchuk.dev), ліцензований за MIT. Це окрема програма, яка взаємодіє з Audio Unit Extension лише через XPC."
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "پائپر ایپ، جسے [Ihor Shevchuk](https://ihor-shevchuk.dev) نے تیار کیا ہے، MIT کے تحت لائسنس یافتہ ہے۔ یہ ایک الگ پروگرام ہے اور صرف XPC کے ذریعے آڈیو یونٹ ایکسٹینشن کے ساتھ بات چیت کرتا ہے۔"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pipper App是由 [Ihor Shevchuk](https://ihor-shevchuk.dev)开发的，是在 MIT下授权的。 这是一个单独的程序，仅通过 XPC 与音频设备扩展进行通信。"
+          }
+        }
+      }
+    },
+    "license_piper_description" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Piper is a fast, open-source neural text-to-speech engine developed by the OHF-Voice community."
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Piper to szybki, otwartoźródłowy, neuronowy silnik TTS opracowany przez społeczność OHF-Voice."
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Piper, OHF-Voice topluluğu tarafından geliştirilen hızlı, açık kaynaklı bir sinirsel metinden konuşmaya motorudur."
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Piper — це швидкий двигун синтезу мовлення, розроблений OHF-Voice community. з відкритим кодом."
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "پائپر ایک تیز، اوپن سورس نیورل ٹیکسٹ ٹو اسپیچ انجن ہے جسے OHF-Voice کمیونٹی نے تیار کیا ہے۔"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Piper是一个由OHF-Voice 社区开发的快速开放源码文字转语音引擎。"
+          }
+        }
+      }
+    },
+    "model" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Model"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Model"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Model"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Модель"
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "اے آئی ماڈل"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "模型"
+          }
+        }
+      }
+    },
+    "no_voices" : {
+      "comment" : "A placeholder text to display when a language has no available voices.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No voices available"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Brak dostępnych głosów"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kullanılabilir ses yok"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Голосів немає"
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "کوئی آوازیں دستیاب نہیں ہیں۔"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "没有可用的声音"
+          }
+        }
+      }
+    },
+    "no_voices_message" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "**No voices are installed yet.**\nUse the **Download Voice Model** button below to add a voice."
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "**Żadne głosy nie są jeszcze zainstalowane.**\nUżyj przycisku **Pobierz model głosu** poniżej, aby dodać głos."
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "**Henüz hiçbir ses yüklenmedi.**\nBir ses eklemek için aşağıdaki **Ses Modelini İndir** düğmesini kullanın."
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "**Жодного голосу ще не встановлено.**  \nЩоб додати голос, скористайтеся кнопкою **Завантажити голосову модель** нижче."
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "**ابھی تک کوئی آوازیں انسٹال نہیں ہیں۔**\nآواز شامل کرنے کے لیے نیچے **وائس ماڈل ڈاؤن لوڈ کریں** بٹن کا استعمال کریں۔"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "**尚未安装声音。**\n使用下面的 **下载语音模型** 按钮添加语音。"
+          }
+        }
+      }
+    },
+    "ok" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ok"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "OK"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tamam"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Гаразд"
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ٹھیک ہے"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "好的"
+          }
+        }
+      }
+    },
+    "onnx_file" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ONNX File"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Plik ONNX"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ONNX Dosyası"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Файл ONNX"
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ONNX فائل"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ONNX 文件"
+          }
+        }
+      }
+    },
+    "piper_app_name" : {
+      "comment" : "The title of the main view.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Piper"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Piper"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Piper"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Piper"
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Piper"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "猪人"
+          }
+        }
+      }
+    },
+    "play_sample" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Play Sample"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Odtwórz próbkę"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Örnek Oynat"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Відтворити приклад"
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "نمونہ کھیلیں"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "播放示例"
+          }
+        }
+      }
+    },
+    "quality" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Quality"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Jakość"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kalite"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Якість"
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "معیار"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "质量"
+          }
+        }
+      }
+    },
+    "sample_rate" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sample Rate"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Częstotliwość próbkowania"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Örnekleme Hızı"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Частота"
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "نمونہ کی شرح"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "采样率"
+          }
+        }
+      }
+    },
+    "sample_text" : {
+      "comment" : "A text field for entering sample text.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sample Text"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Przykładowy tekst"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Örnek Metin"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Текст прикладу"
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "نمونہ متن"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "示例文本"
+          }
+        }
+      }
+    },
+    "sample_text: %@" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sample Text: %1$@"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Przykładowy tekst: %1$@"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Örnek Metin: %1$@"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Приклад: %1$@"
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : " نمونہ متن: %1$@"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "示例文本： %1$@"
+          }
+        }
+      }
+    },
+    "select_json" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Select JSON"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wybierz JSON"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "JSON'u seçin"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Виберіть JSON"
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "JSON کو منتخب کریں۔"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "选择 JSON"
+          }
+        }
+      }
+    },
+    "select_model" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Select Model"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wybierz model"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Model Seç"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Виберіть модель"
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ماڈل منتخب کریں۔"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "选择模型"
+          }
+        }
+      }
+    },
+    "share_feedback" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Share Feedback"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wyślij opinię"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Geri Bildirim Paylaş"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Поділитися Відгуком"
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "فیڈ بیک شیئر کریں۔"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "分享反馈"
+          }
+        }
+      }
+    },
+    "speaker" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Speaker"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Głośnik"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hoparlör"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Голос"
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "متکلم"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "扬声器"
+          }
+        }
+      }
+    },
+    "stop" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Stop"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Stop"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Durdur"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Зупинити"
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "رک جاؤ"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "停止"
+          }
+        }
+      }
+    },
+    "stop_playing" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Stop Playing"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zatrzymaj odtwarzanie"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Oynatmayı Durdur"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Зупинити відтворення"
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "کھیلنا بند کرو"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "停止播放"
+          }
+        }
+      }
+    },
+    "uninstall_button" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Remove"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Usuń"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kaldır"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Видалити"
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ہٹا دیں۔"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "删除"
+          }
+        }
+      }
+    },
+    "uninstall_voice" : {
+      "comment" : "A button label that uninstalls the voice assistant.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Remove Voice Model"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Usuń model głosu"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ses Modelini Kaldır"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Видалити голосову модель"
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "وائس ماڈل کو ہٹا دیں۔"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "删除语音模型"
+          }
+        }
+      }
+    },
+    "update_model_in_app" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Import Model from Files"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Importuj model z plików"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dosyalardan Model İçe Aktar"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Імпортувати з файлів"
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "فائلوں سے ماڈل درآمد کریں۔"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "从文件导入模型"
+          }
+        }
+      }
+    },
+    "version" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Version"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wersja"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sürüm"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Версія"
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ورژن"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "版本"
+          }
+        }
+      }
+    },
+    "voice_loading_progress_%@" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "downloading progress %@%"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "postęp pobierania %@%"
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "indirme ilerlemesi %@%"
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "прогрес завантаження %@ %"
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ڈاؤن لوڈنگ کی پیشرفت %@%"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "正在下载进度 %@%"
+          }
+        }
+      }
+    },
+    "warning_big_voice_files" : {
+      "comment" : "A warning message about the size of voice files.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Note: Voice files can be large. To avoid extra charges, download using Wi-Fi or an unlimited data plan."
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Uwaga: Pliki głosowe mogą być duże. Aby uniknąć dodatkowych opłat, pobieraj przez Wi-Fi lub z nielimitowanym pakietem danych."
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Not: Ses dosyaları büyük olabilir. Ek ücretlerden kaçınmak için Wi-Fi veya sınırsız veri planı ile indirin."
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Примітка: голосові файли можуть бути великими. Щоб уникнути додаткових витрат, завантажуйте через Wi-Fi або безлімітний тариф."
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "نوٹ: صوتی فائلیں بڑی ہو سکتی ہیں۔ اضافی چارجز سے بچنے کے لیے، Wi-Fi یا لامحدود ڈیٹا پلان کا استعمال کرکے ڈاؤن لوڈ کریں۔"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "注意：语音文件可能大。为了避免额外费用，请使用 Wi-Fi 或无限数据计划下载。"
+          }
+        }
+      }
+    },
+    "warning_not_tested_voices" : {
+      "comment" : "A warning displayed below the list of available languages, reminding users that some voices have not been tested.",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "These voices are community-uploaded and may not be fully tested. Some files may be incomplete or behave unexpectedly. Download and install at your own risk."
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Te głosy zostały przesłane przez społeczność i mogą nie być w pełni przetestowane. Niektóre pliki mogą być niekompletne lub działać nieprawidłowo. Pobieraj i instaluj na własne ryzyko."
+          }
+        },
+        "tr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bu sesler topluluk tarafından yüklenmiştir ve tamamen test edilmemiş olabilir. Bazı dosyalar eksik veya beklenmedik şekilde davranabilir. Kendi riskinizle indirin ve yükleyin."
+          }
+        },
+        "uk" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ці голоси додані спільнотою та можуть бути недостатньо протестовані. Деякі файли можуть бути неповними або працювати нестабільно. Завантажуйте та встановлюйте на свій ризик."
+          }
+        },
+        "ur-PK" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "یہ آوازیں کمیونٹی کے ذریعے اپ لوڈ کی گئی ہیں اور ہو سکتا ہے کہ ان کا مکمل تجربہ نہ کیا جائے۔ کچھ فائلیں نامکمل ہو سکتی ہیں یا غیر متوقع طور پر برتاؤ کرتی ہیں۔ اپنی ذمہ داری پر ڈاؤن لوڈ اور انسٹال کریں۔"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "这些声音是社区上传的，可能不会完全测试。一些文件可能不完整或出乎意料。下载并安装您自己承担的风险。"
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.1"
+}

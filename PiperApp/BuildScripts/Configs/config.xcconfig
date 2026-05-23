@@ -1,0 +1,34 @@
+
+IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+MACOSX_DEPLOYMENT_TARGET = 13.3
+COMMON_FEATURES_FLAGS =
+
+// Signing information
+CODE_SIGN_STYLE = Manual;
+DEVELOPMENT_TEAM = 5LBP9YR5SD
+
+// Application category
+INFOPLIST_KEY_LSApplicationCategoryType = public.app-category.utilities
+INFOPLIST_KEY_UILaunchScreen_Generation = YES
+
+// C++ and Swift versions
+SWIFT_VERSION = 5.10.1 
+CLANG_CXX_LANGUAGE_STANDARD = gnu++17
+GCC_C_LANGUAGE_STANDARD = gnu11
+
+// Disable generation of Objective-C header
+SWIFT_OBJC_INTERFACE_HEADER_NAME =
+
+// Strip symbols
+DEPLOYMENT_POSTPROCESSING = YES
+STRIP_INSTALLED_PRODUCT = YES
+STRIP_STYLE = all
+GENERATE_MASTER_OBJECT_FILE = NO
+// Supported languages
+SUPPORTED_LANGUAGES = en
+
+// Warnings as errors
+GCC_TREAT_WARNINGS_AS_ERRORS = YES
+SWIFT_TREAT_WARNINGS_AS_ERRORS = YES
+
+SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx"

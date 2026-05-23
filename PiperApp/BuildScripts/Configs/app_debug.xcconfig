@@ -1,0 +1,5 @@
+#include "debug.xcconfig"
+#include "app_common.xcconfig"
+
+PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*] = Piper App Dev PP
+PROVISIONING_PROFILE_SPECIFIER[sdk=macos*] = Piper Mac Dev PP

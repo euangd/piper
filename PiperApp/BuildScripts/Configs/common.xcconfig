@@ -1,0 +1,15 @@
+#include "version.xcconfig"
+#include "config.xcconfig"
+
+APP_BUNDLE_IDENTIFIER=dev.ihor-shevchuk.piper
+
+CODE_SIGN_ALLOW_ENTITLEMENTS_MODIFICATION[sdk=macosx*] = YES
+
+FEATURES_FLAGS = ${COMMON_FEATURES_FLAGS}
+// Supported platforms
+SUPPORTED_PLATFORMS = iphoneos iphonesimulator macosx
+// macOS support
+SUPPORTS_MACCATALYST = NO
+SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO
+
+PIPER_PRODUCT_NAME=Piper

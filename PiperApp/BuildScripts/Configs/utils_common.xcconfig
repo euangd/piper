@@ -1,0 +1,8 @@
+#include "common.xcconfig"
+
+PRODUCT_BUNDLE_IDENTIFIER = $(APP_BUNDLE_IDENTIFIER).sharedutils
+DEFINES_MODULE = NO
+DEPLOYMENT_POSTPROCESSING = NO
+STRIP_INSTALLED_PRODUCT = NO
+
+#include "combine.xcconfig"

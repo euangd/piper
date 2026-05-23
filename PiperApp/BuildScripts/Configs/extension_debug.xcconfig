@@ -1,0 +1,5 @@
+#include "debug.xcconfig"
+#include "extension_common.xcconfig"
+
+PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*] = Piper TTS Dev PP
+PROVISIONING_PROFILE_SPECIFIER[sdk=macos*] = Piper Mac TTS Dev PP

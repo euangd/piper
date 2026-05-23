@@ -1,0 +1,68 @@
+# SPDX-License-Identifier: MIT
+# Copyright (c) 2026 Ihor Shevchuk
+name: Build
+on:
+  push:
+    branches: ['main']
+    # Only run when app source, xcconfig, scripts, Tuist project, or .mise.toml change (ignores docs, licenses, etc.)
+    paths:
+      - 'PiperApp/**'
+      - 'PiperAppUtils/**'
+      - 'PiperappUtils/**'
+      - 'PiperTTS/**'
+      - 'Project.swift'
+      - 'Package.swift'
+      - 'Package.resolved'
+      - '.mise.toml'
+      - '.github/workflows/build.yml'
+      - '.github/workflows/build-shared.yml'
+  pull_request:
+    branches: ['main']
+    paths:
+      - 'PiperApp/**'
+      - 'PiperAppUtils/**'
+      - 'PiperappUtils/**'
+      - 'PiperTTS/**'
+      - 'Project.swift'
+      - 'Package.swift'
+      - 'Package.resolved'
+      - '.mise.toml'
+      - '.github/workflows/build.yml'
+      - '.github/workflows/build-shared.yml'
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+  checks: write
+  pull-requests: write
+
+jobs:
+  Build:
+    strategy:
+      matrix:
+        platform: ${{ github.event_name == 'pull_request' && fromJSON('["ios-simulator"]') || fromJSON('["ios-device", "macos-device"]') }}
+
+    uses: ./.github/workflows/build-shared.yml
+    with:
+      platform: ${{ matrix.platform }}
+    secrets: inherit
+
+  Lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+
+      - name: Set up mise
+        uses: jdx/mise-action@v4
+        with:
+          install: true
+          cache: true
+
+      - name: mise lint 
+        shell: bash
+        run: |
+          mise run lint --reporter github-actions-logging

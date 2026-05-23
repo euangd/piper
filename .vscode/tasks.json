@@ -1,0 +1,51 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Build (Simulator)",
+      "type": "shell",
+      "command": "mise run build 1 simulator",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared"
+      }
+    },
+    {
+      "label": "Build (Device)",
+      "type": "shell",
+      "command": "mise run build 1 device",
+      "group": "build",
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared"
+      }
+    },
+    {
+      "label": "Generate Xcode Project",
+      "type": "shell",
+      "command": "mise run install && mise run generate",
+      "group": "none",
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared"
+      }
+    },
+    {
+      "label": "Lint",
+      "type": "shell",
+      "command": "mise run lint",
+      "group": "none",
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared"
+      },
+      "problemMatcher": [
+        "$swiftc"
+      ]
+    }
+  ]
+}

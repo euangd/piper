@@ -1,0 +1,130 @@
+name: Shared Build
+
+on:
+  workflow_call:
+    inputs:
+      platform:
+        required: true
+        type: string
+    secrets:
+      BUILD_CERTIFICATE_BASE64:
+        required: true
+      P12_PASSWORD:
+        required: true
+      APP_PROVISION_PROFILE_BASE64:
+        required: true
+      EXT_PROVISION_PROFILE_BASE64:
+        required: true
+      MAC_APP_PROVISION_PROFILE_BASE64:
+        required: true
+      MAC_EXT_PROVISION_PROFILE_BASE64:
+        required: true
+      APPLE_ID_USERNAME:
+        required: true
+      APPLE_ID_APP_SPECIFIC_PASSWORD:
+        required: true
+
+jobs:
+  build:
+    runs-on: macos-latest
+
+    env:
+      CI_BUILD: "1"
+      GITHUB_BUILD: "1"
+      BUILD_OUTPUT: "${{ github.workspace }}/BuildOutput"
+      BUILD_TARGET: ${{ inputs.platform }}
+      ARTIFACT_PATH: >-
+        ${{ inputs.platform == 'ios-device' && 'iOS/Piper.ipa' || 
+        (inputs.platform == 'macos-device' && 'macOS/Piper.pkg' || '') }}
+      SIGN_BUILD: ${{ (inputs.platform == 'ios-device' || inputs.platform == 'macos-device') && github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v6
+        with:
+          clean: true
+          submodules: false
+
+      - name: Setup Mise
+        uses: jdx/mise-action@v4
+
+      - name: Set Build Number
+        run: |
+          echo "BUILD_NUMBER=$GITHUB_RUN_NUMBER" >> $GITHUB_ENV
+          source PiperApp/BuildScripts/Configs/version.xcconfig
+          echo "Full Version: $MARKETING_VERSION($GITHUB_RUN_NUMBER)"
+        shell: bash
+
+      - name: Install Apple Certificate
+        if: env.SIGN_BUILD == 'true'
+        uses: apple-actions/import-codesign-certs@v7
+        with:
+          p12-file-base64: ${{ secrets.BUILD_CERTIFICATE_BASE64 }}
+          p12-password: ${{ secrets.P12_PASSWORD }}
+
+      - name: Install Provisioning Profiles
+        if: env.SIGN_BUILD == 'true'
+        env:
+          PROFILES: >-
+            ${{ secrets.APP_PROVISION_PROFILE_BASE64 }}:ios_app.mobileprovision
+            ${{ secrets.EXT_PROVISION_PROFILE_BASE64 }}:ios_ext.mobileprovision
+            ${{ secrets.MAC_APP_PROVISION_PROFILE_BASE64 }}:mac_app.provisionprofile
+            ${{ secrets.MAC_EXT_PROVISION_PROFILE_BASE64 }}:mac_ext.provisionprofile
+        run: |
+          DEST_DIR="$HOME/Library/MobileDevice/Provisioning Profiles"
+          mkdir -p "$DEST_DIR"
+
+          for entry in $PROFILES; do
+            # Split the secret from the filename
+            DATA="${entry%%:*}"
+            FILENAME="${entry#*:}"
+            
+            echo "Installing $FILENAME..."
+            echo -n "$DATA" | base64 --decode -o "$DEST_DIR/$FILENAME"
+          done
+
+      - name: Select Xcode
+        env:
+          XCODE_VERSION: "26.3"
+        run: |
+          APPLICATIONS_FOLDER="/Applications"
+
+          TARGET="${APPLICATIONS_FOLDER}/Xcode_${XCODE_VERSION}.app"
+          if [ -d "$TARGET" ]; then
+            sudo xcode-select -s "$TARGET"
+          fi
+
+          xcode-select -p
+          xcodebuild -version
+
+      - name: Prepare Project
+        run: |
+          rm -fr *.xcodeproj || true
+          rm -fr *.xcworkspace || true
+          mise run install
+          mise run generate
+
+      - name: Build
+        run: |
+          mise run build $BUILD_NUMBER $BUILD_TARGET
+
+      - name: Store Artifact
+        if: env.SIGN_BUILD == 'true'
+        uses: actions/upload-artifact@v7
+        with:
+          name: Piper-${{ inputs.platform }}-${{ env.BUILD_NUMBER }}
+          path: ${{ env.BUILD_OUTPUT }}/binary/${{ env.ARTIFACT_PATH }}
+          retention-days: 3
+          if-no-files-found: error
+
+      - name: Upload To App Store Connect
+        if: env.SIGN_BUILD == 'true'
+        run: |
+          echo "Uploading to App Store..."
+          FILE="${{ env.BUILD_OUTPUT }}/binary/${{ env.ARTIFACT_PATH }}"
+          echo "Uploading $FILE ..."
+          xcrun altool --upload-app  \
+            -f "$FILE" \
+            -u "${{ secrets.APPLE_ID_USERNAME }}" \
+            -p "${{ secrets.APPLE_ID_APP_SPECIFIC_PASSWORD }}" \
+          done
