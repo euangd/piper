@@ -63,16 +63,7 @@ let project = Project(
                 "\(appName)/Resources/Assets.xcassets"
             ],
             entitlements: .dictionary(appEntitlements),
-            scripts: [
-                .pre(script: """
-                             mise run lint --fix
-                             """,
-                     name: "Run SwiftLint Autocorrector"),
-                .post(script: """
-                              mise run lint
-                              """,
-                      name: "Run SwiftLint Analizer")
-            ],
+            scripts: [],
             dependencies: [
                 .target(name: sharedUtilsName, status: .required),
                 .target(name: ttsExtensionName, status: .required)

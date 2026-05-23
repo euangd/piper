@@ -3,7 +3,7 @@
 
 import Foundation
 
-public struct ModelInfo: Decodable {
+public struct ModelInfo: Decodable, Sendable {
     enum CodingKeys: String, CodingKey {
         case dataset
         case piperVersion = "piper_version"

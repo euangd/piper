@@ -7,7 +7,7 @@ import PiperAppUtils
 class PiperEngine: @unchecked Sendable, TTSEngine {
     let type: TTSEngineType = .piper
     var playbackState: TTSPlaybackState {
-        get async { await playbackStateActor }
+        get async { playbackStateActor }
     }
 
     private let piper: PiperManager

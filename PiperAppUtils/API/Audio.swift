@@ -3,7 +3,7 @@
 
 import Foundation
 
-public struct Audio: Decodable {
+public struct Audio: Decodable, Sendable {
     enum CodingKeys: String, CodingKey {
         case sampleRate = "sample_rate"
         case quality

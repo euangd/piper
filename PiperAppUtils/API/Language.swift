@@ -3,7 +3,7 @@
 
 import Foundation
 
-public struct Language: Decodable {
+public struct Language: Decodable, Sendable {
     enum CodingKeys: String, CodingKey {
         case code
         case family
