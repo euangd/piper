@@ -10,15 +10,12 @@ jobs:
   build-unsigned-ipa:
     name: Archive And Package Unsigned IPA
     runs-on: macos-15
+    env:
+      GITHUB_BUILD: "true"
 
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
-
-      - name: Set up Xcode
-        uses: maxim-lobanov/setup-xcode@v1
-        with:
-          xcode-version: latest-stable
 
       - name: Set up mise
         uses: jdx/mise-action@v4
@@ -27,7 +24,6 @@ jobs:
           cache: true
 
       - name: Regenerate Xcode project
-        shell: bash
         run: |
           set -euo pipefail
           rm -rf *.xcodeproj
@@ -35,14 +31,11 @@ jobs:
           mise run install
           mise run generate
 
-      - name: Capture short commit SHA
-        shell: bash
-        run: echo "sha_short=$(git rev-parse --short HEAD)" >> "$GITHUB_ENV"
-
-      - name: Archive unsigned app
-        shell: bash
+      - name: Build and Package IPA
         run: |
           set -euo pipefail
+          
+          # Archive using xcodebuild
           xcodebuild \
             -workspace Piper.xcworkspace \
             -scheme Piper \
@@ -53,30 +46,15 @@ jobs:
             CODE_SIGN_IDENTITY="" \
             CODE_SIGNING_REQUIRED=NO \
             CODE_SIGNING_ALLOWED=NO
-
-      - name: Package unsigned IPA
-        shell: bash
-        run: |
-          set -euo pipefail
-          rm -rf Payload
+            
+          # Package App into IPA
           mkdir -p Payload
           cp -R build/Piper.xcarchive/Products/Applications/Piper.app Payload/
-          ditto -c -k --sequesterRsrc --keepParent Payload "Piper-unsigned-${sha_short}.ipa"
+          ditto -c -k --sequesterRsrc --keepParent Payload Piper.ipa
 
       - name: Upload unsigned IPA artifact
         uses: actions/upload-artifact@v4
         with:
-          name: Piper-unsigned-${{ env.sha_short }}.ipa
-          path: Piper-unsigned-${{ env.sha_short }}.ipa
+          name: Piper.ipa
+          path: Piper.ipa
           if-no-files-found: error
-
-      - name: Write summary
-        shell: bash
-        run: |
-          {
-            echo "## Unsigned IPA Build"
-            echo
-            echo "- Regenerated the project from \`Project.swift\`"
-            echo "- Archived the app for generic iOS devices without code signing"
-            echo "- Packaged \`Piper-unsigned-${sha_short}.ipa\`"
-          } >> "$GITHUB_STEP_SUMMARY"
