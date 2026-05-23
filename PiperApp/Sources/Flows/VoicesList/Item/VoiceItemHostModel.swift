@@ -51,8 +51,12 @@ class VoiceItemHostModel: @unchecked Sendable, ObservableObject {
                         
                     case .finished(let modelPath):
                         await self.piper.install(paths: modelPath)
-                        try? FileManager.default.removeItem(at: modelPath.json)
-                        try? FileManager.default.removeItem(at: modelPath.model)
+                        if let folder = modelPath.modelFolder {
+                            try? FileManager.default.removeItem(at: folder)
+                        } else {
+                            try? FileManager.default.removeItem(at: modelPath.json)
+                            try? FileManager.default.removeItem(at: modelPath.model)
+                        }
                         self.delegate?.modelDidChange()
                     }
                 }
@@ -84,7 +88,7 @@ class VoiceItemHostModel: @unchecked Sendable, ObservableObject {
             guard let modelInfo = modelPath.info else {
                 return false
             }
-            return modelPath.engine == .piper &&
+            return modelPath.engine == voice.engine &&
                 modelInfo.dataset == voice.name &&
                 modelInfo.audio.quality == voice.quality
         }

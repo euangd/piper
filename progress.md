@@ -170,5 +170,72 @@
 
 - `PiperAppUtils/FileManager/FileManager.swift`
 
+## Session 9 (May 23, 2026)
 
+### Session 9 Done
 
+- Audited the repository's GitHub automation and confirmed `.github/workflows/build-ipa.yml` is the only workflow file present.
+- Repaired workflow robustness issues in `.github/workflows/build-ipa.yml`:
+  - pinned CI to **Xcode 16.4** with `maxim-lobanov/setup-xcode@v1`
+  - replaced wildcard cleanup with deterministic cleanup of `Piper.xcodeproj`, `Piper.xcworkspace`, `build`, `Payload`, and `Piper.ipa`
+  - split archive and packaging into separate steps
+  - captured `xcodebuild` archive output via `tee build/logs/xcodebuild-archive.log`
+  - added an always-on artifact upload step for archive logs
+- Fixed the broken README workflow badge/link so it points to the actual workflow file:
+  - `actions/workflows/build-ipa.yml`
+
+### Session 9 Validation
+
+- `get_errors` reports **no errors** for `.github/workflows/build-ipa.yml` after the patch.
+- Searched the workspace for workflow references and confirmed the stale `build.yml` reference in `README.md` was the only broken workflow link.
+- Full GitHub Actions execution remains unverified in this Windows shell because macOS/Xcode runners are not available locally.
+
+### Session 9 Files Modified
+
+- `.github/workflows/build-ipa.yml`
+- `README.md`
+
+## Session 10 (May 23, 2026)
+
+### Session 10 Done
+
+- Moved the app further beyond Piper-only model handling:
+  - added a bundled `external_tts_manifest.json` catalog with verified Hugging Face bundle entries for Kokoro, MeloTTS, and Supertonic 3
+  - updated `VoiceLoader` so downloads can install full model bundles, not just one ONNX plus one JSON
+  - generated installed metadata for non-Piper downloaded models so the app shows the correct voice name, engine, language, and quality
+  - preserved all sidecar files during install, including tokenizer, lexicon, voices/style files, and multi-ONNX assets
+  - added recursive local folder import for model bundles in addition to individual model/config file import
+  - made voice download rows engine-aware and disabled Piper sample playback controls for non-Piper rows
+  - relaxed `ModelInfo` decoding so non-Piper config/metadata JSON can still produce an installed voice identity
+  - improved Kokoro vocabulary loading from `tokenizer.json`
+  - loosened MeloTTS loading to accept `tokens.txt` and single-model exports without an explicit BERT sidecar
+  - fixed the URL session download completion delegate signature to use `Swift.Error`
+  - restored the two-file install fallback when model/config files are selected from different folders
+  - added unit coverage for generated external model metadata and loose external config decoding
+
+### Session 10 Validation
+
+- Verified `PiperApp/Resources/manifests/external_tts_manifest.json` parses as JSON.
+- Ran `git diff --check`; no whitespace errors were reported.
+- Full Swift/Tuist/Xcode validation is still blocked in this Windows shell because `swift`, `tuist`, and `xcodebuild` are unavailable.
+
+### Session 10 Files Created
+
+- `PiperApp/Resources/manifests/external_tts_manifest.json`
+
+### Session 10 Files Modified
+
+- `PiperApp/Sources/VoiceLoading/VoiceLoader.swift`
+- `PiperApp/Sources/VoiceLoading/Models/Voice.swift`
+- `PiperApp/Sources/VoiceLoading/Models/VoiceFile.swift`
+- `PiperApp/Sources/Utils/FileManager.swift`
+- `PiperApp/Sources/Utils/Array.swift`
+- `PiperApp/Sources/Flows/ImportVoice/ImportVoiceView.swift`
+- `PiperApp/Sources/Flows/ImportVoice/ImportVoiceHostModel.swift`
+- `PiperApp/Sources/Flows/ImportVoice/ImportVoiceViewModel.swift`
+- `PiperApp/Sources/Flows/VoicesList/Item/VoiceItemView.swift`
+- `PiperApp/Sources/Flows/VoicesList/Item/VoiceItemHostModel.swift`
+- `PiperAppUtils/API/ModelInfo.swift`
+- `PiperApp/Sources/Engines/KokoroTTSEngine.swift`
+- `PiperApp/Sources/Engines/MeloTTSEngine.swift`
+- `PiperTests/ModelPathsTests.swift`

@@ -153,11 +153,13 @@ final class KokoroTTSEngine: @unchecked Sendable, TTSEngine {
         let modelPath = paths.primaryModelURL ?? paths.model
         let lexiconPath = paths.findFile(matchingNameCandidates: ["lexicon", "lexicon.txt"], preferredExtensions: ["txt"]) ?? folder.appendingPathComponent("lexicon.txt")
 
-        // 1. Read config.json for vocab
+        // 1. Read config/tokenizer JSON for vocab
         let configData = try Data(contentsOf: configPath)
         let configDict = try JSONSerialization.jsonObject(with: configData) as? [String: Any]
-        guard let vocab = configDict?["vocab"] as? [String: Int] else {
-            throw Error.modelLoadFailed("config.json is missing 'vocab' mapping")
+        let tokenizerPath = paths.findFile(matchingNameCandidates: ["tokenizer", "tokenizer.json"], preferredExtensions: ["json"])
+        let vocab = try Self.loadVocabulary(configDict: configDict, tokenizerPath: tokenizerPath)
+        guard !vocab.isEmpty else {
+            throw Error.modelLoadFailed("Missing Kokoro vocabulary in config.json or tokenizer.json")
         }
 
         // 2. Load lexicon
@@ -244,7 +246,7 @@ final class KokoroTTSEngine: @unchecked Sendable, TTSEngine {
 
     private func loadStyleVector(paths: FileManager.ModelPaths, folder: URL, speakerId: Int) throws -> [Float] {
         let specificStyleName = "style_\(speakerId).bin"
-        let styleURL = paths.findFile(matchingNameCandidates: [specificStyleName, "style", "style.bin"], preferredExtensions: ["bin"]) ?? folder.appendingPathComponent("style.bin")
+        let styleURL = paths.findFile(matchingNameCandidates: [specificStyleName, "af_bella", "voice", "style", "style.bin"], preferredExtensions: ["bin"]) ?? folder.appendingPathComponent("style.bin")
 
         guard FileManager.default.fileExists(atPath: styleURL.path) else {
             return [Float](repeating: 0.0, count: 256)
@@ -260,6 +262,32 @@ final class KokoroTTSEngine: @unchecked Sendable, TTSEngine {
             let typedPointer = rawBuffer.baseAddress!.assumingMemoryBound(to: Float.self)
             let typedBuffer = UnsafeBufferPointer(start: typedPointer, count: 256)
             return Array(typedBuffer)
+        }
+    }
+
+    private static func loadVocabulary(configDict: [String: Any]?, tokenizerPath: URL?) throws -> [String: Int] {
+        if let vocab = configDict?["vocab"] as? [String: Int] {
+            return vocab
+        }
+
+        guard let tokenizerPath,
+              FileManager.default.fileExists(atPath: tokenizerPath.path) else {
+            return [:]
+        }
+
+        let data = try Data(contentsOf: tokenizerPath)
+        guard let tokenizer = try JSONSerialization.jsonObject(with: data) as? [String: Any],
+              let model = tokenizer["model"] as? [String: Any],
+              let rawVocab = model["vocab"] as? [String: Any] else {
+            return [:]
+        }
+
+        return rawVocab.reduce(into: [String: Int]()) { result, pair in
+            if let intValue = pair.value as? Int {
+                result[pair.key] = intValue
+            } else if let numberValue = pair.value as? NSNumber {
+                result[pair.key] = numberValue.intValue
+            }
         }
     }
     #else

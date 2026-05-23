@@ -71,6 +71,40 @@ class ImportVoiceHostModel: @unchecked Sendable, ObservableObject {
         
         viewModel.selectedJSONURL = json
     }
+
+    func select(folder: URL?) {
+        guard let folder else {
+            Log.error("Failed to find model folder")
+            return
+        }
+
+        let didStartAccessing = folder.startAccessingSecurityScopedResource()
+        defer {
+            if didStartAccessing {
+                folder.stopAccessingSecurityScopedResource()
+            }
+            modelDidChange()
+        }
+
+        do {
+            let files = FileManager.default.flatFiles(in: folder) ?? []
+            guard let modelURL = files.model,
+                  let jsonURL = files.json else {
+                Log.error("Model folder does not contain a supported model file and JSON config")
+                return
+            }
+            _ = try ModelInfo.create(from: jsonURL)
+            let stagingFolder = try createStagedBundle(from: files)
+            let stagedFiles = FileManager.default.flatFiles(in: stagingFolder) ?? []
+            viewModel.selectedFolderURL = stagingFolder
+            viewModel.selectedModelURL = stagedFiles.first { $0.lastPathComponent == modelURL.lastPathComponent }
+            viewModel.selectedJSONURL = stagedFiles.first { $0.lastPathComponent == jsonURL.lastPathComponent }
+        } catch {
+            Log.error("Invalid model folder: \(error)")
+            viewModel.error = error
+            viewModel.showErrorMessage = true
+        }
+    }
     
     func install() {
         guard let paths = FileManager.ModelPaths(model: viewModel.selectedModelURL,
@@ -84,16 +118,17 @@ class ImportVoiceHostModel: @unchecked Sendable, ObservableObject {
             defer {
                 paths.model.stopAccessingSecurityScopedResource()
                 paths.json.stopAccessingSecurityScopedResource()
+                self?.viewModel.selectedFolderURL?.stopAccessingSecurityScopedResource()
             }
 
-            if paths.model.startAccessingSecurityScopedResource() != true {
-                Log.error("Failed to access model")
-                return
+            let hasFolderAccess = self?.viewModel.selectedFolderURL?.startAccessingSecurityScopedResource() == true
+
+            if !hasFolderAccess {
+                _ = paths.model.startAccessingSecurityScopedResource()
             }
             
-            if paths.json.startAccessingSecurityScopedResource() != true {
-                Log.error("Failed to access JSON")
-                return
+            if !hasFolderAccess {
+                _ = paths.json.startAccessingSecurityScopedResource()
             }
             
             if (try? ModelInfo.create(from: paths.json)) == nil {
@@ -106,6 +141,9 @@ class ImportVoiceHostModel: @unchecked Sendable, ObservableObject {
             }
             
             await self.piper.install(paths: paths)
+            if let stagedFolder = self.viewModel.selectedFolderURL {
+                try? FileManager.default.removeItem(at: stagedFolder)
+            }
             self.delegate?.modelDidChange()
             await MainActor.run { [weak self] in
                 self?.viewModel.onDismiss?()
@@ -121,6 +159,21 @@ class ImportVoiceHostModel: @unchecked Sendable, ObservableObject {
                 self.objectWillChange.send()
             }
         }
+    }
+
+    private func createStagedBundle(from files: [URL]) throws -> URL {
+        guard let temporaryDirectoryURL = FileManager.tempFolderInDocumentDirectory else {
+            throw FileManager.Error.nilTemporaryDirectory
+        }
+        let folder = temporaryDirectoryURL.appendingPathComponent(UUID().uuidString, isDirectory: true)
+        try FileManager.default.createDirectory(at: folder, withIntermediateDirectories: true)
+        for sourceFile in files {
+            let destination = folder.appendingPathComponent(sourceFile.lastPathComponent)
+            if !FileManager.default.fileExists(atPath: destination.path) {
+                try FileManager.default.copyItem(at: sourceFile, to: destination)
+            }
+        }
+        return folder
     }
 }
 

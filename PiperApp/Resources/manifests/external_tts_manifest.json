@@ -1,0 +1,106 @@
+{
+  "kokoro-en-af-bella-q8": {
+    "key": "kokoro-en-af-bella-q8",
+    "name": "Kokoro Bella",
+    "quality": "q8f16",
+    "engine": "kokoro",
+    "summary": "English Kokoro ONNX bundle with Bella voice embedding.",
+    "language": {
+      "code": "en_US",
+      "family": "en",
+      "region": "US"
+    },
+    "files": {
+      "onnx/model_q8f16.onnx": {
+        "url": "https://huggingface.co/onnx-community/Kokoro-82M-v1.0-ONNX/resolve/main/onnx/model_q8f16.onnx",
+        "size_bytes": 86033585,
+        "role": "model"
+      },
+      "config.json": {
+        "url": "https://huggingface.co/onnx-community/Kokoro-82M-v1.0-ONNX/resolve/main/config.json",
+        "size_bytes": 44,
+        "role": "config"
+      },
+      "tokenizer.json": {
+        "url": "https://huggingface.co/onnx-community/Kokoro-82M-v1.0-ONNX/resolve/main/tokenizer.json",
+        "size_bytes": 3497
+      },
+      "voices/af_bella.bin": {
+        "url": "https://huggingface.co/onnx-community/Kokoro-82M-v1.0-ONNX/resolve/main/voices/af_bella.bin",
+        "size_bytes": 522240
+      }
+    }
+  },
+  "melotts-en-newest": {
+    "key": "melotts-en-newest",
+    "name": "MeloTTS English",
+    "quality": "onnx",
+    "engine": "meloTTS",
+    "summary": "English MeloTTS ONNX export with lexicon and token metadata.",
+    "language": {
+      "code": "en_US",
+      "family": "en",
+      "region": "US"
+    },
+    "files": {
+      "onnx_exports/en_newest/model.onnx": {
+        "url": "https://huggingface.co/MiaoMint/MeloTTS-ONNX/resolve/main/onnx_exports/en_newest/model.onnx",
+        "size_bytes": 170346705,
+        "role": "model"
+      },
+      "onnx_exports/en_newest/metadata.json": {
+        "url": "https://huggingface.co/MiaoMint/MeloTTS-ONNX/resolve/main/onnx_exports/en_newest/metadata.json",
+        "size_bytes": 471,
+        "role": "config"
+      },
+      "onnx_exports/en_newest/lexicon.txt": {
+        "url": "https://huggingface.co/MiaoMint/MeloTTS-ONNX/resolve/main/onnx_exports/en_newest/lexicon.txt",
+        "size_bytes": 4814775
+      },
+      "onnx_exports/en_newest/tokens.txt": {
+        "url": "https://huggingface.co/MiaoMint/MeloTTS-ONNX/resolve/main/onnx_exports/en_newest/tokens.txt",
+        "size_bytes": 1440
+      }
+    }
+  },
+  "supertonic3-m1": {
+    "key": "supertonic3-m1",
+    "name": "Supertonic 3 M1",
+    "quality": "onnx",
+    "engine": "supertonic3",
+    "summary": "Supertonic 3 ONNX bundle with M1 voice style.",
+    "language": {
+      "code": "multi",
+      "family": "multi",
+      "region": "001"
+    },
+    "files": {
+      "onnx/text_encoder.onnx": {
+        "url": "https://huggingface.co/Supertone/supertonic-3/resolve/main/onnx/text_encoder.onnx",
+        "size_bytes": 36416150,
+        "role": "model"
+      },
+      "onnx/tts.json": {
+        "url": "https://huggingface.co/Supertone/supertonic-3/resolve/main/onnx/tts.json",
+        "size_bytes": 8253,
+        "role": "config"
+      },
+      "onnx/duration_predictor.onnx": {
+        "url": "https://huggingface.co/Supertone/supertonic-3/resolve/main/onnx/duration_predictor.onnx",
+        "size_bytes": 3700147
+      },
+      "onnx/vector_estimator.onnx": {
+        "url": "https://huggingface.co/Supertone/supertonic-3/resolve/main/onnx/vector_estimator.onnx",
+        "size_bytes": 256534781
+      },
+      "onnx/vocoder.onnx": {
+        "url": "https://huggingface.co/Supertone/supertonic-3/resolve/main/onnx/vocoder.onnx",
+        "size_bytes": 101424195
+      },
+      "voice_styles/M1.json": {
+        "url": "https://huggingface.co/Supertone/supertonic-3/resolve/main/voice_styles/M1.json",
+        "size_bytes": 291748
+      }
+    }
+  }
+}

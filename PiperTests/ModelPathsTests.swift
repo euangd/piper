@@ -63,6 +63,51 @@ final class ModelPathsTests: XCTestCase {
         XCTAssertTrue(paths.exist)
     }
 
+    func testModelInfoDecodesGeneratedExternalMetadata() throws {
+        let metadata = """
+        {
+          "dataset": "Kokoro Bella",
+          "piper_version": "kokoro",
+          "language": {
+            "code": "en_US",
+            "family": "en",
+            "region": "US"
+          },
+          "audio": {
+            "sample_rate": 24000,
+            "quality": "q8f16"
+          },
+          "speaker_id_map": {},
+          "num_speakers": 1
+        }
+        """
+        let jsonURL = try writeFile(named: "external.json", contents: metadata)
+
+        let info = try ModelInfo.create(from: jsonURL)
+
+        XCTAssertEqual(info.name, "Kokoro Bella")
+        XCTAssertEqual(info.piperVersion, "kokoro")
+        XCTAssertEqual(info.language.code, "en_US")
+        XCTAssertEqual(info.audio.sampleRate, 24000)
+        XCTAssertEqual(info.audio.quality, "q8f16")
+    }
+
+    func testModelInfoDecodesLooseExternalConfig() throws {
+        let metadata = """
+        {
+          "model_type": "style_text_to_speech_2"
+        }
+        """
+        let jsonURL = try writeFile(named: "loose.json", contents: metadata)
+
+        let info = try ModelInfo.create(from: jsonURL)
+
+        XCTAssertEqual(info.name, "style_text_to_speech_2")
+        XCTAssertEqual(info.piperVersion, "style_text_to_speech_2")
+        XCTAssertEqual(info.language.code, "en_US")
+        XCTAssertEqual(info.audio.sampleRate, 24000)
+    }
+
     private func makePaths(canonicalModelName: String,
                            jsonName: String = "voice.json") throws -> FileManager.ModelPaths {
         let modelURL = temporaryDirectory.appendingPathComponent(canonicalModelName)

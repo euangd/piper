@@ -152,21 +152,28 @@ final class MeloTTSEngine: @unchecked Sendable, TTSEngine {
         let configPath = paths.json
 
         // Locate model files robustly inside the model folder
-        let bertPath = paths.findFile(matchingNameCandidates: ["bert", "bert.onnx"], preferredExtensions: PiperAppUtils.Constants.supportedModelExtensions) ?? folder.appendingPathComponent("bert.onnx")
+        let bertPath = paths.findFile(matchingNameCandidates: ["bert", "bert.onnx"], preferredExtensions: PiperAppUtils.Constants.supportedModelExtensions)
         let ttsPath = paths.findFile(matchingNameCandidates: ["tts", "tts.onnx", "model", "melo_tts"], preferredExtensions: PiperAppUtils.Constants.supportedModelExtensions) ?? folder.appendingPathComponent("tts.onnx")
         let vocabPath = paths.findFile(matchingNameCandidates: ["vocab", "vocab.txt"], preferredExtensions: ["txt"]) ?? folder.appendingPathComponent("vocab.txt")
         let lexiconPath = paths.findFile(matchingNameCandidates: ["lexicon", "lexicon.txt"], preferredExtensions: ["txt"]) ?? folder.appendingPathComponent("lexicon.txt")
+        let tokensPath = paths.findFile(matchingNameCandidates: ["tokens", "tokens.txt"], preferredExtensions: ["txt"])
 
-        // 1. Read config.json for symbols
+        // 1. Read config/tokens for symbols
         let configData = try Data(contentsOf: configPath)
         let configDict = try JSONSerialization.jsonObject(with: configData) as? [String: Any]
-        guard let symbols = configDict?["symbols"] as? [String] else {
-            throw Error.modelLoadFailed("config.json is missing 'symbols'")
+        let symbols = try Self.loadSymbols(configDict: configDict, tokensPath: tokensPath)
+        guard !symbols.isEmpty else {
+            throw Error.modelLoadFailed("Missing symbols in config.json or tokens.txt")
         }
 
         // 2. Load lexicon and tokenizer
-        let tokenizer = try BertTokenizer(vocabPath: vocabPath)
         let g2p = EnglishG2P(lexiconPath: lexiconPath)
+        let tokenizer: BertTokenizer?
+        if bertPath != nil && FileManager.default.fileExists(atPath: vocabPath.path) {
+            tokenizer = try BertTokenizer(vocabPath: vocabPath)
+        } else {
+            tokenizer = nil
+        }
 
         // 3. Tokenize text into words & punctuation
         let rawTokens = Self.tokenizeToWordsAndPunctuation(text: text)
@@ -177,7 +184,7 @@ final class MeloTTSEngine: @unchecked Sendable, TTSEngine {
         var word2ph = [Int]()
 
         // Prepend CLS token and SP phone
-        if let clsId = tokenizer.vocab["[CLS]"] {
+        if let clsId = tokenizer?.vocab["[CLS]"] {
             bertInputIds.append(Int32(clsId))
         } else {
             bertInputIds.append(101)
@@ -187,9 +194,9 @@ final class MeloTTSEngine: @unchecked Sendable, TTSEngine {
 
         // Process each token
         for rawToken in rawTokens {
-            let subTokens = tokenizer.wordpieceTokenize(word: rawToken)
+            let subTokens = tokenizer?.wordpieceTokenize(word: rawToken) ?? [rawToken]
             for (subIndex, subToken) in subTokens.enumerated() {
-                let id = tokenizer.vocab[subToken] ?? tokenizer.vocab["[UNK]"] ?? 100
+                let id = tokenizer?.vocab[subToken] ?? tokenizer?.vocab["[UNK]"] ?? 100
                 bertInputIds.append(Int32(id))
 
                 // Phonemes associated with the first sub-token only
@@ -204,7 +211,7 @@ final class MeloTTSEngine: @unchecked Sendable, TTSEngine {
         }
 
         // Append SEP token and SP phone
-        if let sepId = tokenizer.vocab["[SEP]"] {
+        if let sepId = tokenizer?.vocab["[SEP]"] {
             bertInputIds.append(Int32(sepId))
         } else {
             bertInputIds.append(102)
@@ -214,34 +221,8 @@ final class MeloTTSEngine: @unchecked Sendable, TTSEngine {
 
         // 5. BERT Inference
         let env = try ORTEnv(loggingLevel: .warning)
-        let bertSession = try await sessionStore.session(for: bertPath.path) { path in
-            try ORTSession(env: env, modelPath: path, sessionOptions: nil)
-        }
 
         let mask = [Int32](repeating: 1, count: bertInputIds.count)
-
-        let bertInputShape: [NSNumber] = [1, NSNumber(value: bertInputIds.count)]
-        let bertInputData = Data(bytes: bertInputIds, count: bertInputIds.count * MemoryLayout<Int32>.stride)
-        let bertInputVal = try ORTValue(tensorData: NSMutableData(data: bertInputData), elementType: .int64, shape: bertInputShape)
-
-        let maskData = Data(bytes: mask, count: mask.count * MemoryLayout<Int32>.stride)
-        let maskVal = try ORTValue(tensorData: NSMutableData(data: maskData), elementType: .int64, shape: bertInputShape)
-
-        let bertOutputs = try bertSession.run(
-            withInputs: ["input_ids": bertInputVal, "attention_mask": maskVal],
-            outputNames: try bertSession.outputNames(),
-            runOptions: nil
-        )
-
-        guard let bertOutputVal = bertOutputs.values.first else {
-            throw Error.inferenceFailed("BERT model run failed to produce outputs")
-        }
-
-        let bertOutputData = try bertOutputVal.tensorDataWithError()
-        let bertOutputFloats = ONNXTensorConverter.values(from: bertOutputData, as: Float.self)
-
-        let bertShape = try bertOutputVal.tensorTypeAndShapeInfo().shape
-        let hiddenDim = bertShape.count >= 3 ? bertShape[2].intValue : 1024
 
         // 6. Align BERT features to phones
         let addBlank = true
@@ -254,6 +235,34 @@ final class MeloTTSEngine: @unchecked Sendable, TTSEngine {
                 finalWord2ph[i] = finalWord2ph[i] * 2
             }
             finalWord2ph[0] += 1
+        }
+
+        let hiddenDim: Int
+        let bertOutputFloats: [Float]
+        if let bertPath {
+            let bertSession = try await sessionStore.session(for: bertPath.path) { path in
+                try ORTSession(env: env, modelPath: path, sessionOptions: nil)
+            }
+            let bertInputShape: [NSNumber] = [1, NSNumber(value: bertInputIds.count)]
+            let bertInputData = Data(bytes: bertInputIds, count: bertInputIds.count * MemoryLayout<Int32>.stride)
+            let bertInputVal = try ORTValue(tensorData: NSMutableData(data: bertInputData), elementType: .int64, shape: bertInputShape)
+            let maskData = Data(bytes: mask, count: mask.count * MemoryLayout<Int32>.stride)
+            let maskVal = try ORTValue(tensorData: NSMutableData(data: maskData), elementType: .int64, shape: bertInputShape)
+            let bertOutputs = try bertSession.run(
+                withInputs: ["input_ids": bertInputVal, "attention_mask": maskVal],
+                outputNames: try bertSession.outputNames(),
+                runOptions: nil
+            )
+            guard let bertOutputVal = bertOutputs.values.first else {
+                throw Error.inferenceFailed("BERT model run failed to produce outputs")
+            }
+            let bertOutputData = try bertOutputVal.tensorDataWithError()
+            bertOutputFloats = ONNXTensorConverter.values(from: bertOutputData, as: Float.self)
+            let bertShape = try bertOutputVal.tensorTypeAndShapeInfo().shape
+            hiddenDim = bertShape.count >= 3 ? bertShape[2].intValue : 1024
+        } else {
+            hiddenDim = 1024
+            bertOutputFloats = [Float](repeating: 0.0, count: finalWord2ph.count * hiddenDim)
         }
 
         let alignedBert = Self.alignBertFeatures(bertOutput: bertOutputFloats, word2ph: finalWord2ph, hiddenDim: hiddenDim)
@@ -334,7 +343,7 @@ final class MeloTTSEngine: @unchecked Sendable, TTSEngine {
     }
 
     private static func tokenizeToWordsAndPunctuation(text: String) -> [String] {
-        let punctuationSet = CharacterSet(charactersIn: "!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~…")
+        let punctuationSet = CharacterSet(charactersIn: "!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~...")
         var result = [String]()
         let components = text.components(separatedBy: .whitespacesAndNewlines).filter { !$0.isEmpty }
 
@@ -394,6 +403,22 @@ final class MeloTTSEngine: @unchecked Sendable, TTSEngine {
             }
         }
         return transposed
+    }
+
+    private static func loadSymbols(configDict: [String: Any]?, tokensPath: URL?) throws -> [String] {
+        if let symbols = configDict?["symbols"] as? [String] {
+            return symbols
+        }
+
+        guard let tokensPath,
+              FileManager.default.fileExists(atPath: tokensPath.path) else {
+            return []
+        }
+
+        let contents = try String(contentsOf: tokensPath, encoding: .utf8)
+        return contents.components(separatedBy: .newlines)
+            .map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
+            .filter { !$0.isEmpty }
     }
     #else
     private func runInference(text: String, voice: VoiceModel, speakerId: Int, speed: Float) async throws -> [Float] {

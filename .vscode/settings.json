@@ -37,5 +37,8 @@
     "github.copilot.chat.switchAgent.enabled": true,
     "inlineChat.notebookAgent": true,
     "chat.tools.compressOutput.enabled": true,
-    "chat.tools.confirmationCarousel.enabled": true
+    "chat.tools.confirmationCarousel.enabled": true,
+    "github-actions.workflows.pinned.workflows": [
+        ".github/workflows/build-ipa.yml"
+    ]
 }

@@ -17,6 +17,11 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v4
 
+      - name: Select Xcode 16.4
+        uses: maxim-lobanov/setup-xcode@v1
+        with:
+          xcode-version: "16.4"
+
       - name: Set up mise
         uses: jdx/mise-action@v4
         with:
@@ -26,15 +31,16 @@ jobs:
       - name: Regenerate Xcode project
         run: |
           set -euo pipefail
-          rm -rf *.xcodeproj
-          rm -rf *.xcworkspace
+          rm -rf Piper.xcodeproj Piper.xcworkspace build Payload Piper.ipa
           mise run install
           mise run generate
 
-      - name: Build and Package IPA
+      - name: Archive app
         run: |
           set -euo pipefail
-          
+
+          mkdir -p build/logs
+
           # Archive using xcodebuild
           xcodebuild \
             -workspace Piper.xcworkspace \
@@ -45,12 +51,25 @@ jobs:
             archive \
             CODE_SIGN_IDENTITY="" \
             CODE_SIGNING_REQUIRED=NO \
-            CODE_SIGNING_ALLOWED=NO
-            
+            CODE_SIGNING_ALLOWED=NO \
+            | tee build/logs/xcodebuild-archive.log
+
+      - name: Package IPA
+        run: |
+          set -euo pipefail
+
           # Package App into IPA
           mkdir -p Payload
           cp -R build/Piper.xcarchive/Products/Applications/Piper.app Payload/
           ditto -c -k --sequesterRsrc --keepParent Payload Piper.ipa
+
+      - name: Upload archive logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: xcodebuild-archive-logs
+          path: build/logs
+          if-no-files-found: warn
 
       - name: Upload unsigned IPA artifact
         uses: actions/upload-artifact@v4

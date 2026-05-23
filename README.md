@@ -18,7 +18,7 @@
   </a>
 </p>
 
-[![Build](https://github.com/IhorShevchuk/piper-app/actions/workflows/build.yml/badge.svg?branch=main)](https://github.com/IhorShevchuk/piper-app/actions/workflows/build.yml)
+[![Build](https://github.com/IhorShevchuk/piper-app/actions/workflows/build-ipa.yml/badge.svg?branch=main)](https://github.com/IhorShevchuk/piper-app/actions/workflows/build-ipa.yml)
 
 # 🌐 Help Translate Piper
 

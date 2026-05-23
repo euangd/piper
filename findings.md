@@ -109,3 +109,23 @@ Text -> AVSpeechSynthesisProviderRequest -> PiperTTSAudioUnit -> piper-objc (C++
   - `type 'FileManager.Constants' has no member 'supportedModelExtensions'`
   - exactly matched the two references in `ModelPaths.primaryModelURL`.
 - Explicitly qualifying those references with `PiperAppUtils.Constants` should unblock the `PiperAppUtils` Swift compile step in CI.
+
+## Session 9 Findings (Workflow Audit)
+
+- `.github/workflows/build-ipa.yml` is the repository's only GitHub Actions workflow file.
+- The workflow previously relied on the runner's default Xcode selection; pinning `maxim-lobanov/setup-xcode@v1` to **16.4** matches the archive log environment (`/Applications/Xcode_16.4.app`) and reduces runner drift.
+- Splitting archive and IPA packaging into separate steps makes failures easier to localize in Actions logs.
+- Piping `xcodebuild` through `tee` while keeping `set -euo pipefail` preserves the real archive exit status and produces a reusable `build/logs/xcodebuild-archive.log` artifact.
+- `README.md` referenced `actions/workflows/build.yml`, but no such workflow exists in this repo; the actual workflow path is `actions/workflows/build-ipa.yml`.
+
+## Session 10 Findings (Model Bundle Import/Download)
+
+- The previous downloader still had a Piper-shaped assumption: one model file plus one JSON config. Kokoro, MeloTTS, and Supertonic 3 need full folders with tokenizer, lexicon, voice/style, and multi-ONNX sidecars.
+- `FileManager.install(paths:)` copied only `paths.model` and `paths.json`, so non-Piper downloads/imports lost the files required for inference. Installing every sibling file from the selected source folder preserves those bundles.
+- Downloaded non-Piper configs often are not Piper `ModelInfo` JSON. Generating a small installed metadata JSON gives the app stable display names and duplicate detection while keeping the original engine files in the same installed folder.
+- Kokoro's current public ONNX bundle stores its vocabulary in `tokenizer.json` under `model.vocab`, while `config.json` only identifies the model type. The engine now checks both.
+- The verified catalog entries currently point at:
+  - `onnx-community/Kokoro-82M-v1.0-ONNX`
+  - `MiaoMint/MeloTTS-ONNX`
+  - `Supertone/supertonic-3`
+- Runtime synthesis still needs real Apple toolchain/device validation. The downloader/importer path can be validated statically here, but ONNX model input compatibility needs a macOS/iOS run.

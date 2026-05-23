@@ -3,6 +3,7 @@
 
 import SwiftUI
 import PiperAppUtils
+import UniformTypeIdentifiers
 
 struct ImportVoiceHostModelView: View {
     
@@ -47,6 +48,7 @@ struct ImportVoiceHostModelView: View {
     
     @State var isShowingModelFileSelector = false
     @State var isShowingJsonFileSelector = false
+    @State var isShowingFolderSelector = false
     var body: some View {
         NavigationStack {
             List {
@@ -59,6 +61,23 @@ struct ImportVoiceHostModelView: View {
                 }
 
                 Section {
+                    Button {
+                        isShowingFolderSelector = true
+                    } label: {
+                        Label("Select Model Folder", systemImage: "folder")
+                            .font(.title2)
+                    }
+                    .fileImporter(isPresented: $isShowingFolderSelector,
+                                  allowedContentTypes: [.folder],
+                                  onCompletion: { results in
+                        switch results {
+                        case .success(let folderURL):
+                            hostModel.select(folder: folderURL)
+                        case .failure(let error):
+                            Log.error("Failed to import model folder: \(error)")
+                        }
+                    })
+
                     HStack {
                         Spacer()
                         importButton(image: .onnx,

@@ -22,8 +22,9 @@ struct VoiceItemView: View {
     
     @ViewBuilder
     private func playDemo() -> some View {
-        
-        if hostModel.viewModel.isPlaying {
+        if voice.engine != .piper {
+            EmptyView()
+        } else if hostModel.viewModel.isPlaying {
             Button {
                 hostModel.stopPlaying()
             } label: {
@@ -92,16 +93,22 @@ struct VoiceItemView: View {
         HStack {
             Spacer()
                 .frame(width: 10)
-            VStack {
+            VStack(alignment: .leading, spacing: 4) {
                 HStack {
                     Text(voiceTitle)
                         .font(.title)
                     Spacer()
                 }
                 HStack {
-                    Text(voice.voiceSizeString)
+                    Text("\(voice.engine.displayName) - \(voice.voiceSizeString)")
                         .font(.body)
+                        .foregroundStyle(.secondary)
                     Spacer()
+                }
+                if let summary = voice.summary {
+                    Text(summary)
+                        .font(.footnote)
+                        .foregroundStyle(.secondary)
                 }
             }
             .accessibilityElement(children: .combine)

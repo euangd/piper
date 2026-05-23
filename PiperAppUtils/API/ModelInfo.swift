@@ -42,6 +42,53 @@ public struct ModelInfo: Decodable, Sendable {
         let jsonDecoder = JSONDecoder()
         return try jsonDecoder.decode(ModelInfo.self, from: data)
     }
+
+    public init(from decoder: any Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        let loose = try decoder.container(keyedBy: FlexibleCodingKey.self)
+
+        self.dataset = try container.decodeIfPresent(String.self, forKey: .dataset)
+            ?? loose.string(for: "name")
+            ?? loose.string(for: "model_name")
+            ?? loose.string(for: "model_type")
+            ?? loose.string(for: "comment")
+            ?? loose.string(for: "description")
+
+        self.piperVersion = try container.decodeIfPresent(String.self, forKey: .piperVersion)
+            ?? loose.string(for: "version")
+            ?? loose.string(for: "tts_version")
+            ?? loose.string(for: "model_type")
+            ?? "external"
+
+        if let language = try container.decodeIfPresent(Language.self, forKey: .language) {
+            self.language = language
+        } else {
+            let code = loose.string(for: "language_code")
+                ?? loose.string(for: "language")
+                ?? loose.string(for: "lang")
+                ?? "en_US"
+            let family = code.split(separator: "_").first.map(String.init) ?? code
+            let region = code.split(separator: "_").dropFirst().first.map(String.init) ?? family.uppercased()
+            self.language = Language(code: code, family: family, region: region)
+        }
+
+        if let audio = try container.decodeIfPresent(Audio.self, forKey: .audio) {
+            self.audio = audio
+        } else {
+            let sampleRate = loose.double(for: "sample_rate") ?? loose.double(for: "sampleRate") ?? 24000.0
+            self.audio = Audio(sampleRate: sampleRate, quality: loose.string(for: "quality") ?? "downloaded")
+        }
+
+        self.speakersInternal = try container.decodeIfPresent([String: Int].self, forKey: .speakersInternal)
+            ?? loose.dictionary(for: "speakers")
+            ?? loose.dictionary(for: "speaker_id_map")
+            ?? loose.dictionary(for: "voices")
+
+        self.numberOfSpeakersInternal = try container.decodeIfPresent(Int.self, forKey: .numberOfSpeakersInternal)
+            ?? loose.int(for: "n_speakers")
+            ?? loose.int(for: "num_speakers")
+            ?? speakersInternal?.count
+    }
     
     public static var installed: ModelInfo? {
         if FileManager.default.isInstalled {
@@ -114,5 +161,81 @@ extension ModelInfo: Equatable {
         && lhs.audio == rhs.audio
         && lhs.speakers == rhs.speakers
         && lhs.numberOfSpeakers == rhs.numberOfSpeakers
+    }
+}
+
+private struct FlexibleCodingKey: CodingKey {
+    let stringValue: String
+    let intValue: Int?
+
+    init?(stringValue: String) {
+        self.stringValue = stringValue
+        self.intValue = nil
+    }
+
+    init?(intValue: Int) {
+        self.stringValue = "\(intValue)"
+        self.intValue = intValue
+    }
+}
+
+private extension KeyedDecodingContainer where Key == FlexibleCodingKey {
+    func string(for key: String) -> String? {
+        guard let codingKey = FlexibleCodingKey(stringValue: key) else {
+            return nil
+        }
+
+        if let stringValue = try? decodeIfPresent(String.self, forKey: codingKey) {
+            return stringValue
+        }
+        if let intValue = try? decodeIfPresent(Int.self, forKey: codingKey) {
+            return "\(intValue)"
+        }
+        return nil
+    }
+
+    func int(for key: String) -> Int? {
+        guard let codingKey = FlexibleCodingKey(stringValue: key) else {
+            return nil
+        }
+
+        if let value = try? decodeIfPresent(Int.self, forKey: codingKey) {
+            return value
+        }
+        if let stringValue = try? decodeIfPresent(String.self, forKey: codingKey) {
+            return Int(stringValue)
+        }
+        return nil
+    }
+
+    func double(for key: String) -> Double? {
+        guard let codingKey = FlexibleCodingKey(stringValue: key) else {
+            return nil
+        }
+
+        if let value = try? decodeIfPresent(Double.self, forKey: codingKey) {
+            return value
+        }
+        if let intValue = try? decodeIfPresent(Int.self, forKey: codingKey) {
+            return Double(intValue)
+        }
+        if let stringValue = try? decodeIfPresent(String.self, forKey: codingKey) {
+            return Double(stringValue)
+        }
+        return nil
+    }
+
+    func dictionary(for key: String) -> [String: Int]? {
+        guard let codingKey = FlexibleCodingKey(stringValue: key) else {
+            return nil
+        }
+
+        if let dictionary = try? decodeIfPresent([String: Int].self, forKey: codingKey) {
+            return dictionary
+        }
+        if let names = try? decodeIfPresent([String].self, forKey: codingKey) {
+            return Dictionary(uniqueKeysWithValues: names.enumerated().map { ($0.element, $0.offset) })
+        }
+        return nil
     }
 }

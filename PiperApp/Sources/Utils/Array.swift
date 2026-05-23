@@ -6,10 +6,12 @@ import PiperAppUtils
 
 extension Array where Element == URL {
     var model: Element? {
-        first { url in
-            let ext = url.pathExtension.lowercased()
-            return Constants.supportedModelExtensions.contains(ext) || ext == Constants.modelExtension
+        for ext in Constants.supportedModelExtensions {
+            if let found = first(where: { $0.pathExtension.lowercased() == ext }) {
+                return found
+            }
         }
+        return first { $0.pathExtension.lowercased() == Constants.modelExtension }
     }
 
     var json: Element? {

@@ -20,6 +20,7 @@ struct ImportVoiceViewModel {
     
     var selectedModelURL: URL?
     var selectedJSONURL: URL?
+    var selectedFolderURL: URL?
     var selectedEngine: TTSEngineType = .piper
     var onDismiss: (() -> Void)?
     var error: Error?

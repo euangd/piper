@@ -37,10 +37,22 @@ extension FileManager {
         }
         
         let fileManager = FileManager.default
-        // create folder and copy files preserving their original filenames
+        // Create folder and copy files preserving their original filenames.
+        // Non-Piper engines are model bundles, so install every sibling file when
+        // the selected model/config came from the same source folder.
         try fileManager.createModelPathsFolder(paths: destination)
-        try fileManager.copyItem(at: paths.json, to: destination.json)
-        try fileManager.copyItem(at: paths.model, to: destination.model)
+        if paths.model.deletingLastPathComponent() == paths.json.deletingLastPathComponent(),
+           let sourceFiles = fileManager.flatFiles(in: paths.model.deletingLastPathComponent()) {
+            for sourceFile in sourceFiles where !sourceFile.hasDirectoryPath {
+                let target = installFolder.appendingPathComponent(sourceFile.lastPathComponent)
+                if !fileManager.fileExists(atPath: target.path) {
+                    try fileManager.copyItem(at: sourceFile, to: target)
+                }
+            }
+        } else {
+            try fileManager.copyItem(at: paths.json, to: destination.json)
+            try fileManager.copyItem(at: paths.model, to: destination.model)
+        }
         var installedModels = FileManager.ModelPaths.installedModels
         installedModels.append(destination)
         FileManager.ModelPaths.installedModels = installedModels
@@ -100,6 +112,23 @@ extension FileManager {
         let movedFileURL = temporaryDirectoryURL.appendingPathComponent(UUID().uuidString)
         try self.copyItem(at: fileURL, to: movedFileURL)
         return movedFileURL
+    }
+
+    func flatFiles(in folder: URL) -> [URL]? {
+        guard let enumerator = enumerator(at: folder,
+                                          includingPropertiesForKeys: [.isRegularFileKey],
+                                          options: [.skipsHiddenFiles]) else {
+            return nil
+        }
+
+        return enumerator.compactMap { item in
+            guard let url = item as? URL,
+                  let values = try? url.resourceValues(forKeys: [.isRegularFileKey]),
+                  values.isRegularFile == true else {
+                return nil
+            }
+            return url
+        }
     }
 }
 
