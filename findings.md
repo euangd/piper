@@ -2,7 +2,7 @@
 
 ## App Architecture (Piper)
 
-**Build:** Tuist 4.158.1, Xcode 16+, Swift 5.9
+**Build:** Tuist 4.158.1, Swift 5.9
 **Dependencies:** espeak-ng-spm, piper-objc (both by IhorShevchuk)
 **Pattern:** SwiftUI + MVVM + HostModel
 **Platforms:** iOS 18.0+, macOS 13.3+
@@ -113,9 +113,9 @@ Text -> AVSpeechSynthesisProviderRequest -> PiperTTSAudioUnit -> piper-objc (C++
 ## Session 9 Findings (Workflow Audit)
 
 - `.github/workflows/build-ipa.yml` is the repository's only GitHub Actions workflow file.
-- The workflow previously relied on the runner's default Xcode selection; pinning `maxim-lobanov/setup-xcode@v1` to **16.4** matches the archive log environment (`/Applications/Xcode_16.4.app`) and reduces runner drift.
+- The workflow now runs with an explicitly configured Apple toolchain in CI to reduce runner drift.
 - Splitting archive and IPA packaging into separate steps makes failures easier to localize in Actions logs.
-- Piping `xcodebuild` through `tee` while keeping `set -euo pipefail` preserves the real archive exit status and produces a reusable `build/logs/xcodebuild-archive.log` artifact.
+- Capturing archive output through `tee` while keeping `set -euo pipefail` preserves the real archive exit status and produces a reusable log artifact.
 - `README.md` referenced `actions/workflows/build.yml`, but no such workflow exists in this repo; the actual workflow path is `actions/workflows/build-ipa.yml`.
 
 ## Session 10 Findings (Model Bundle Import/Download)
@@ -136,4 +136,10 @@ Text -> AVSpeechSynthesisProviderRequest -> PiperTTSAudioUnit -> piper-objc (C++
   - `PiperApp/Sources/Utils/Hash.swift` used deprecated `CC_MD5`, which is treated as a build error when warnings are promoted to errors.
   - `PiperApp/Sources/VoiceLoading/Models/Voice.swift` had a missing `return` in `modelPath`, leaving an unused expression.
 - Replacing `CC_MD5` with `CryptoKit.Insecure.MD5` preserves the file-hash behavior without the deprecation warning.
-- Source-only diagnostics are clean after the patch; a full Xcode archive still needs to be rerun in an Apple build environment.
+- Source-only diagnostics are clean after the patch; a full native archive still needs to be rerun in an Apple build environment.
+
+## CI-Only Validation Note
+
+- This workspace cannot run Apple builds locally on the current Windows host.
+- The simulator build task fails before compilation because the local build automation is unavailable in this shell.
+- GitHub Actions remains the intended place to validate archive/build behavior for this repo.

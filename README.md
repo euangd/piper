@@ -40,8 +40,7 @@ If your language isn't listed yet, please [open an issue](https://github.com/Iho
 
 * iOS 17.0+
 * macOS 14.0+
-* Xcode 16+
-* `mise`
+* An Apple build environment for native app development
 
 ---
 
@@ -54,54 +53,11 @@ cd piper-app
 
 ---
 
-## Install Toolchain (via mise)
+## Generate the Workspace
 
-Piper uses `mise` to manage development tools.
+Piper uses **Tuist** with Swift Package Manager for dependencies. First resolve SPM dependencies, then generate the workspace using the project’s automation scripts.
 
-Install mise
-
-```bash
-curl https://mise.run | sh
-```
-
-Then install tools:
-
-```bash
-mise install
-```
-
-This installs:
-
-* Tuist
-* SwiftLint
-
----
-
-## Generate the Xcode Project
-
-Piper uses **Tuist** with Swift Package Manager for dependencies. First resolve SPM dependencies, then generate the workspace:
-
-```bash
-mise run install
-mise run generate
-```
-
-Open the generated `.xcworkspace` in Xcode.
-
-```bash
-open Piper.xcworkspace 
-```
-
-> **Note:** Run `mise run install` whenever `Package.swift` or dependencies change. Otherwise `mise run generate` alone is sufficient.
-
-### Available Mise Tasks
-
-| Task | Description |
-|------|-------------|
-| `mise run install` | Resolve SPM dependencies (`Package.swift`) |
-| `mise run generate` | Generate Xcode project |
-| `mise run build <number> [simulator\|device]` | Build from command line (for CI) |
-| `mise run lint [--fix]` | Run SwiftLint |
+> **Note:** Re-run the dependency resolution step whenever `Package.swift` or dependencies change.
 
 ## English Voice Manifest
 
@@ -127,7 +83,7 @@ python scripts/verify_manifest_small_files_md5.py --manifest PiperApp/Resources/
 
 `Project.swift` defines a `PiperTests` unit-test target with coverage for `FileManager.ModelPaths` model discovery and fallback behavior.
 
-After generating the Xcode workspace, run the `PiperTests` target from Xcode's test navigator or scheme picker.
+After generating the workspace, run the `PiperTests` target from the Apple build environment's test runner or scheme picker.
 
 ---
 
@@ -135,7 +91,7 @@ After generating the Xcode workspace, run the `PiperTests` target from Xcode's t
 
 ## Simulator
 
-1. Open the generated workspace
+1. Open the generated workspace in your Apple build environment
 2. Select an iOS Simulator
 3. Build & Run `Piper`
 
@@ -143,7 +99,7 @@ After generating the Xcode workspace, run the `PiperTests` target from Xcode's t
 
 ## Physical Device
 
-1. Open the generated workspace
+1. Open the generated workspace in your Apple build environment
 2. Select your device
 3. Configure code signing for:
    * `Piper`

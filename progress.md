@@ -1,12 +1,21 @@
 # Progress
 
 ## Session 2 (May 23, 2026)
-
-### Phase 2 Work Completed
 - User answered all 5 strategic questions
 - Updated task_plan.md with decisions
-- **Phase 1: Multi-Engine Architecture — complete**
-  - Created `PiperAppUtils/TTSEngineType.swift` — enum with .piper, .meloTTS, .kokoro, .supertonic3
+
+## Session 12 (May 23, 2026)
+
+### CI-only validation note
+
+- Confirmed this workspace cannot run Apple builds locally on the current Windows host.
+- Verified the simulator task fails before compilation because the local build automation is unavailable in this shell.
+- Confirmed the GitHub Actions workflow is the intended build/validation path for archive coverage.
+
+### Validation
+
+- Ran read-only checks against the workflow, build scripts, and project manifest.
+- No repo-side build blocker was found in the current manifests; the remaining blocker is environment/toolchain availability on this device.
   - Created `PiperApp/Sources/Engines/TTSEngine.swift` — protocol with play/stop/synthesize
   - Created `PiperApp/Sources/Engines/PiperEngine.swift` — wraps PiperManager as TTSEngine
   - Created `PiperApp/Sources/Engines/EngineRegistry.swift` — singleton registry
@@ -34,6 +43,7 @@
 ## Session 3 (May 23, 2026)
 
 ### Build fixes
+
 - **Phase 2: ONNX Runtime Integration — started and scaffolded**
   - Added ONNX Runtime package dependency in `Package.swift`
   - Linked ONNX Runtime to app target in `Project.swift` (`.external(name: "onnxruntime")`)
@@ -44,8 +54,9 @@
     - `PiperApp/Sources/Engines/ONNX/AudioNormalizer.swift`
 
 ### Verification
+
 - `get_errors` on workspace: **No errors found**
-- Build task `Build (Simulator)`: **blocked** (environment missing `mise` command)
+- Build task `Build (Simulator)`: **blocked** (local build automation unavailable in this shell)
 
 ### Next Phase
 - Continue **Phase 5 (MeloTTS)** using ONNX scaffolding:
@@ -106,7 +117,7 @@
 
 ### Validation
 - Re-scanned the changed source paths and old `installedPath`/`installNew` usages with `rg`.
-- Full Swift/Tuist/Xcode build validation remains blocked in this Windows shell because `swift`, `tuist`, and `xcodebuild` are unavailable.
+- Full native build validation remains blocked in this Windows shell because the required Apple toolchain is unavailable.
 
 ## Session 6 (May 23, 2026)
 
@@ -188,7 +199,7 @@
 
 - `get_errors` reports **no errors** for `.github/workflows/build-ipa.yml` after the patch.
 - Searched the workspace for workflow references and confirmed the stale `build.yml` reference in `README.md` was the only broken workflow link.
-- Full GitHub Actions execution remains unverified in this Windows shell because macOS/Xcode runners are not available locally.
+- Full GitHub Actions execution remains unverified in this Windows shell because macOS runners are not available locally.
 
 ### Session 9 Files Modified
 
@@ -217,7 +228,7 @@
 
 - Verified `PiperApp/Resources/manifests/external_tts_manifest.json` parses as JSON.
 - Ran `git diff --check`; no whitespace errors were reported.
-- Full Swift/Tuist/Xcode validation is still blocked in this Windows shell because `swift`, `tuist`, and `xcodebuild` are unavailable.
+- Full native validation is still blocked in this Windows shell because the required Apple toolchain is unavailable.
 
 ## Session 11 (May 23, 2026)
 
@@ -232,6 +243,7 @@
 
 - `get_errors` on the patched files: no errors.
 - `get_errors` on `PiperApp/Sources` and `PiperAppUtils`: no errors.
+- `Build (Simulator)` task still fails immediately in this Windows shell because the local build automation is unavailable.
 
 ### Session 10 Files Created
 
@@ -253,3 +265,16 @@
 - `PiperApp/Sources/Engines/KokoroTTSEngine.swift`
 - `PiperApp/Sources/Engines/MeloTTSEngine.swift`
 - `PiperTests/ModelPathsTests.swift`
+
+## Session 13 (May 23, 2026)
+
+### Context recovery
+
+- Re-read the current plan, progress, and findings files to restore context.
+- Ran the planning catch-up script from the installed skill path; it returned no unsynced context.
+- Re-checked the repo memory note about ONNX Runtime linkage and sanity-scanned `Project.swift` / `Package.swift` for direct `onnxruntime` references; no direct matches were returned by the workspace search.
+
+### Build check
+
+- No new code changes were needed.
+- The build remains blocked by the unavailable native build automation on this Windows host.

@@ -21,15 +21,10 @@ if [ "$ENABLE_PREVIEWS" = "YES" ] ; then
 fi
 
 
-if which mise >/dev/null; then
-  mise install
-  mise use swiftlint
-  mise exec -- swiftlint "$@" --config $(dirname "$0")/swiftlint.yml
+if command -v swiftlint >/dev/null 2>&1; then
+   swiftlint "$@" --config $(dirname "$0")/swiftlint.yml
 else
-   # If mise was installed via brew it is needed to make symbolic lynk from mise in brew path to system path:
-   # You may use next command to do this:
-   # sudo ln -s /opt/homebrew/bin/mise /usr/local/bin/
-   echo "warning: mise not installed"
+    echo "warning: swiftlint not installed"
 fi
 
 echo "Done Linting..."
