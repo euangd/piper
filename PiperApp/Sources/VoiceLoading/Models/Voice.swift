@@ -22,7 +22,7 @@ class Voice: Decodable {
         if let explicit = files.first(where: { $0.value.role == "model" })?.key {
             return explicit
         }
-        Array(files.keys).model
+        return Array(files.keys).model
     }
     var jsonPath: String? {
         if let explicit = files.first(where: { $0.value.role == "config" || $0.value.role == "metadata" })?.key {

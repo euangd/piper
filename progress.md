@@ -33,7 +33,7 @@
 
 ## Session 3 (May 23, 2026)
 
-### Done
+### Build fixes
 - **Phase 2: ONNX Runtime Integration — started and scaffolded**
   - Added ONNX Runtime package dependency in `Package.swift`
   - Linked ONNX Runtime to app target in `Project.swift` (`.external(name: "onnxruntime")`)
@@ -43,7 +43,7 @@
     - `PiperApp/Sources/Engines/ONNX/ONNXTensorConverter.swift`
     - `PiperApp/Sources/Engines/ONNX/AudioNormalizer.swift`
 
-### Validation
+### Verification
 - `get_errors` on workspace: **No errors found**
 - Build task `Build (Simulator)`: **blocked** (environment missing `mise` command)
 
@@ -218,6 +218,20 @@
 - Verified `PiperApp/Resources/manifests/external_tts_manifest.json` parses as JSON.
 - Ran `git diff --check`; no whitespace errors were reported.
 - Full Swift/Tuist/Xcode validation is still blocked in this Windows shell because `swift`, `tuist`, and `xcodebuild` are unavailable.
+
+## Session 11 (May 23, 2026)
+
+### Done
+
+- Fixed the two explicit Swift compile blockers from the archive log:
+  - replaced deprecated `CC_MD5` usage in `PiperApp/Sources/Utils/Hash.swift` with `CryptoKit.Insecure.MD5`
+  - added the missing `return` in `PiperApp/Sources/VoiceLoading/Models/Voice.swift` for the fallback model path lookup
+- Ran source-only diagnostics on `PiperApp/Sources` and `PiperAppUtils`; no Swift errors remain in those areas.
+
+### Validation
+
+- `get_errors` on the patched files: no errors.
+- `get_errors` on `PiperApp/Sources` and `PiperAppUtils`: no errors.
 
 ### Session 10 Files Created
 

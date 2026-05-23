@@ -129,3 +129,11 @@ Text -> AVSpeechSynthesisProviderRequest -> PiperTTSAudioUnit -> piper-objc (C++
   - `MiaoMint/MeloTTS-ONNX`
   - `Supertone/supertonic-3`
 - Runtime synthesis still needs real Apple toolchain/device validation. The downloader/importer path can be validated statically here, but ONNX model input compatibility needs a macOS/iOS run.
+
+## Session 11 Findings (Build Fix)
+
+- The archive failure's Swift-side blockers were limited to two files:
+  - `PiperApp/Sources/Utils/Hash.swift` used deprecated `CC_MD5`, which is treated as a build error when warnings are promoted to errors.
+  - `PiperApp/Sources/VoiceLoading/Models/Voice.swift` had a missing `return` in `modelPath`, leaving an unused expression.
+- Replacing `CC_MD5` with `CryptoKit.Insecure.MD5` preserves the file-hash behavior without the deprecation warning.
+- Source-only diagnostics are clean after the patch; a full Xcode archive still needs to be rerun in an Apple build environment.
