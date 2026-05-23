@@ -2,7 +2,7 @@
 // Copyright (c) 2026 Ihor Shevchuk
 
 import Foundation
-import Crypto
+import CommonCrypto
 
 extension Data {
     var md5String: String {
