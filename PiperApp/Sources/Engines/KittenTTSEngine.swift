@@ -150,8 +150,8 @@ final class KittenTTSEngine: @unchecked Sendable, TTSEngine {
         }
 
         let configPath = paths.json
-        let modelPath = paths.model
-        let tokenizerPath = folder.appendingPathComponent("tokenizer.json")
+        let modelPath = paths.primaryModelURL ?? paths.model
+        let tokenizerPath = paths.findFile(matchingNameCandidates: ["tokenizer", "tokenizer.json"], preferredExtensions: ["json"]) ?? folder.appendingPathComponent("tokenizer.json")
 
         // 1. Read tokenizer.json for vocab
         guard FileManager.default.fileExists(atPath: tokenizerPath.path) else {
@@ -300,10 +300,20 @@ class KittenG2P {
     private var lexicon: [String: String] = [:]
 
     init(modelFolder: URL) {
-        let localLexicon = modelFolder.appendingPathComponent("lexicon.txt")
-        if FileManager.default.fileExists(atPath: localLexicon.path) {
-            loadLexicon(from: localLexicon)
-            return
+        // Try to find a lexicon file in the provided model folder
+        if let files = try? FileManager.default.contentsOfDirectory(at: modelFolder, includingPropertiesForKeys: nil) {
+            if let found = files.first(where: { $0.lastPathComponent.lowercased() == "lexicon.txt" }) {
+                loadLexicon(from: found)
+                return
+            }
+            if let found = files.first(where: { $0.deletingPathExtension().lastPathComponent.lowercased() == "lexicon" }) {
+                loadLexicon(from: found)
+                return
+            }
+            if let found = files.first(where: { $0.lastPathComponent.lowercased().contains("lexicon") }) {
+                loadLexicon(from: found)
+                return
+            }
         }
 
         // Re-use other models' lexicons if available

@@ -157,20 +157,17 @@ final class PocketTTSEngine: @unchecked Sendable, TTSEngine {
             throw Error.modelLoadFailed("Missing model files or directory")
         }
 
-        let bundlePath = folder.appendingPathComponent("bundle.json")
-        let tokenizerPath = folder.appendingPathComponent("tokenizer.model")
-        
-        let textConditionerPath = folder.appendingPathComponent("text_conditioner.onnx")
-        
+        let bundlePath = paths.findFile(matchingNameCandidates: ["bundle.json", "bundle"], preferredExtensions: ["json"]) ?? folder.appendingPathComponent("bundle.json")
+        let tokenizerPath = paths.findFile(matchingNameCandidates: ["tokenizer.model", "tokenizer"], preferredExtensions: ["model", "spm"]) ?? folder.appendingPathComponent("tokenizer.model")
+
+        let textConditionerPath = paths.findFile(matchingNameCandidates: ["text_conditioner", "text_conditioner.onnx"], preferredExtensions: PiperAppUtils.Constants.supportedModelExtensions) ?? folder.appendingPathComponent("text_conditioner.onnx")
+
         // Load main and flow models (try int8 first, fallback to fp32)
-        let flowLmMains = ["flow_lm_main_int8.onnx", "flow_lm_main.onnx"]
-        let flowLmMainPath = flowLmMains.map { folder.appendingPathComponent($0) }.first { FileManager.default.fileExists(atPath: $0.path) }
-        
-        let flowLmFlows = ["flow_lm_flow_int8.onnx", "flow_lm_flow.onnx"]
-        let flowLmFlowPath = flowLmFlows.map { folder.appendingPathComponent($0) }.first { FileManager.default.fileExists(atPath: $0.path) }
-        
-        let mimiDecoders = ["mimi_decoder_int8.onnx", "mimi_decoder.onnx"]
-        let mimiDecoderPath = mimiDecoders.map { folder.appendingPathComponent($0) }.first { FileManager.default.fileExists(atPath: $0.path) }
+        let flowLmMainPath = paths.findFile(matchingNameCandidates: ["flow_lm_main_int8.onnx", "flow_lm_main.onnx", "flow_lm_main", "main"], preferredExtensions: PiperAppUtils.Constants.supportedModelExtensions)
+
+        let flowLmFlowPath = paths.findFile(matchingNameCandidates: ["flow_lm_flow_int8.onnx", "flow_lm_flow.onnx", "flow_lm_flow", "flow"], preferredExtensions: PiperAppUtils.Constants.supportedModelExtensions)
+
+        let mimiDecoderPath = paths.findFile(matchingNameCandidates: ["mimi_decoder_int8.onnx", "mimi_decoder.onnx", "mimi_decoder", "mimi"], preferredExtensions: PiperAppUtils.Constants.supportedModelExtensions)
 
         guard FileManager.default.fileExists(atPath: bundlePath.path),
               FileManager.default.fileExists(atPath: tokenizerPath.path),
@@ -214,7 +211,7 @@ final class PocketTTSEngine: @unchecked Sendable, TTSEngine {
         }
 
         // 4. Load Voice Embedding
-        let voiceEmbedding = try loadVoiceEmbedding(folder: folder, speakerId: speakerId)
+        let voiceEmbedding = try loadVoiceEmbedding(paths: paths, folder: folder, speakerId: speakerId)
 
         // 5. Preprocess text
         let preparedText = text.trimmingCharacters(in: .whitespacesAndNewlines)
@@ -366,9 +363,9 @@ final class PocketTTSEngine: @unchecked Sendable, TTSEngine {
         return AudioNormalizer.normalize(fullAudio)
     }
 
-    private func loadVoiceEmbedding(folder: URL, speakerId: Int) throws -> [Float] {
+    private func loadVoiceEmbedding(paths: FileManager.ModelPaths, folder: URL, speakerId _: Int) throws -> [Float] {
         // Look for bos_before_voice.npy
-        let bosFile = folder.appendingPathComponent("bos_before_voice.npy")
+        let bosFile = paths.findFile(matchingNameCandidates: ["bos_before_voice.npy", "bos_before_voice", "bos.npy"], preferredExtensions: ["npy"]) ?? folder.appendingPathComponent("bos_before_voice.npy")
         if let parsed = NpyParser.parse(url: bosFile) {
             return parsed
         }

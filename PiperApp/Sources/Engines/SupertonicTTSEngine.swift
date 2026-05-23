@@ -149,9 +149,9 @@ final class SupertonicTTSEngine: @unchecked Sendable, TTSEngine {
             throw Error.modelLoadFailed("Missing model files or directory")
         }
 
-        let textEncoderPath = folder.appendingPathComponent("text_encoder.onnx")
-        let durationPredictorPath = folder.appendingPathComponent("duration_predictor.onnx")
-        let decoderPath = folder.appendingPathComponent("decoder.onnx")
+        let textEncoderPath = paths.findFile(matchingNameCandidates: ["text_encoder", "text_encoder.onnx", "encoder"], preferredExtensions: PiperAppUtils.Constants.supportedModelExtensions) ?? folder.appendingPathComponent("text_encoder.onnx")
+        let durationPredictorPath = paths.findFile(matchingNameCandidates: ["duration_predictor", "duration_predictor.onnx", "duration"], preferredExtensions: PiperAppUtils.Constants.supportedModelExtensions) ?? folder.appendingPathComponent("duration_predictor.onnx")
+        let decoderPath = paths.findFile(matchingNameCandidates: ["decoder", "decoder.onnx"], preferredExtensions: PiperAppUtils.Constants.supportedModelExtensions) ?? folder.appendingPathComponent("decoder.onnx")
 
         let env = try ORTEnv(loggingLevel: .warning)
 

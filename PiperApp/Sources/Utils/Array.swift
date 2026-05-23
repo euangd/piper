@@ -6,32 +6,38 @@ import PiperAppUtils
 
 extension Array where Element == URL {
     var model: Element? {
-        first(with: Constants.modelExtensiom)
+        first { url in
+            let ext = url.pathExtension.lowercased()
+            return Constants.supportedModelExtensions.contains(ext) || ext == Constants.modelExtension
+        }
     }
-    
+
     var json: Element? {
-        first(with: Constants.jsonModelExtension)
-    }
-    
-    private func first(with pathExtension: String) -> Element? {
-        first { fileURL in
-            fileURL.pathExtension.lowercased() == pathExtension
+        first { url in
+            url.pathExtension.lowercased() == Constants.jsonModelExtension
         }
     }
 }
 
 extension Array where Element == String {
     var model: Element? {
-        first(with: Constants.modelExtensiom)
-    }
-    
-    var json: Element? {
-        first(with: Constants.jsonModelExtension)
-    }
-    
-    private func first(with pathExtension: String) -> Element? {
-        first { file in
-            file.hasSuffix(pathExtension)
+        // Try supported extensions (check lowercase paths)
+        for ext in Constants.supportedModelExtensions {
+            if let found = first(where: { file in file.lowercased().hasSuffix(".\(ext)") }) {
+                return found
+            }
         }
+        // Fallback to legacy single extension match
+        return first(where: { file in
+            let lower = file.lowercased()
+            return lower.hasSuffix(".\(Constants.modelExtension)") || lower.hasSuffix(Constants.modelExtension)
+        })
+    }
+
+    var json: Element? {
+        first(where: { file in
+            let lower = file.lowercased()
+            return lower.hasSuffix(".\(Constants.jsonModelExtension)") || lower.hasSuffix(Constants.jsonModelExtension)
+        })
     }
 }

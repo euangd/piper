@@ -22,6 +22,21 @@ class Voice: Decodable {
     var jsonPath: String? {
         Array(files.keys).json
     }
+
+    // If the manifest provides explicit absolute URLs for files, expose them here.
+    var modelFileURL: URL? {
+        guard let key = modelPath, let file = files[key], let urlString = file.url else {
+            return nil
+        }
+        return URL(string: urlString)
+    }
+
+    var jsonFileURL: URL? {
+        guard let key = jsonPath, let file = files[key], let urlString = file.url else {
+            return nil
+        }
+        return URL(string: urlString)
+    }
 }
 
 extension Voice: Equatable {

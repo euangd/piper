@@ -150,8 +150,8 @@ final class KokoroTTSEngine: @unchecked Sendable, TTSEngine {
         }
 
         let configPath = paths.json
-        let modelPath = paths.model
-        let lexiconPath = folder.appendingPathComponent("lexicon.txt")
+        let modelPath = paths.primaryModelURL ?? paths.model
+        let lexiconPath = paths.findFile(matchingNameCandidates: ["lexicon", "lexicon.txt"], preferredExtensions: ["txt"]) ?? folder.appendingPathComponent("lexicon.txt")
 
         // 1. Read config.json for vocab
         let configData = try Data(contentsOf: configPath)
@@ -201,7 +201,7 @@ final class KokoroTTSEngine: @unchecked Sendable, TTSEngine {
         let attentionMask = inputIds.map { $0 > 0 ? Int64(1) : Int64(0) }
 
         // 7. Load voice style embedding
-        let styleEmbedding = try loadStyleVector(folder: folder, speakerId: speakerId)
+        let styleEmbedding = try loadStyleVector(paths: paths, folder: folder, speakerId: speakerId)
 
         // 8. Run ONNX inference
         let inputShape: [NSNumber] = [1, NSNumber(value: seqLen)]
@@ -242,10 +242,9 @@ final class KokoroTTSEngine: @unchecked Sendable, TTSEngine {
         return AudioNormalizer.normalize(audioOutputFloats)
     }
 
-    private func loadStyleVector(folder: URL, speakerId: Int) throws -> [Float] {
-        let specificStyleURL = folder.appendingPathComponent("style_\(speakerId).bin")
-        let defaultStyleURL = folder.appendingPathComponent("style.bin")
-        let styleURL = FileManager.default.fileExists(atPath: specificStyleURL.path) ? specificStyleURL : defaultStyleURL
+    private func loadStyleVector(paths: FileManager.ModelPaths, folder: URL, speakerId: Int) throws -> [Float] {
+        let specificStyleName = "style_\(speakerId).bin"
+        let styleURL = paths.findFile(matchingNameCandidates: [specificStyleName, "style", "style.bin"], preferredExtensions: ["bin"]) ?? folder.appendingPathComponent("style.bin")
 
         guard FileManager.default.fileExists(atPath: styleURL.path) else {
             return [Float](repeating: 0.0, count: 256)

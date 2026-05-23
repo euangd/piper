@@ -150,10 +150,12 @@ final class MeloTTSEngine: @unchecked Sendable, TTSEngine {
         }
 
         let configPath = paths.json
-        let bertPath = folder.appendingPathComponent("bert.onnx")
-        let ttsPath = folder.appendingPathComponent("tts.onnx")
-        let vocabPath = folder.appendingPathComponent("vocab.txt")
-        let lexiconPath = folder.appendingPathComponent("lexicon.txt")
+
+        // Locate model files robustly inside the model folder
+        let bertPath = paths.findFile(matchingNameCandidates: ["bert", "bert.onnx"], preferredExtensions: PiperAppUtils.Constants.supportedModelExtensions) ?? folder.appendingPathComponent("bert.onnx")
+        let ttsPath = paths.findFile(matchingNameCandidates: ["tts", "tts.onnx", "model", "melo_tts"], preferredExtensions: PiperAppUtils.Constants.supportedModelExtensions) ?? folder.appendingPathComponent("tts.onnx")
+        let vocabPath = paths.findFile(matchingNameCandidates: ["vocab", "vocab.txt"], preferredExtensions: ["txt"]) ?? folder.appendingPathComponent("vocab.txt")
+        let lexiconPath = paths.findFile(matchingNameCandidates: ["lexicon", "lexicon.txt"], preferredExtensions: ["txt"]) ?? folder.appendingPathComponent("lexicon.txt")
 
         // 1. Read config.json for symbols
         let configData = try Data(contentsOf: configPath)

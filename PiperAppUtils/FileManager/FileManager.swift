@@ -20,8 +20,12 @@ extension FileManager {
         }
         
         public var exist: Bool {
-            return FileManager.default.fileExists(atPath: model.path) &&
-            FileManager.default.fileExists(atPath: json.path)
+            let fileManager = FileManager.default
+            guard fileManager.fileExists(atPath: json.path) else {
+                return false
+            }
+
+            return fileManager.fileExists(atPath: model.path) || primaryModelURL != nil
         }
         
         public var modelFolder: URL? {
@@ -58,6 +62,137 @@ extension FileManager {
             }
             
             return ModelPaths.installed.contains(self)
+        }
+
+        /// Returns a best-effort primary model file URL for this `ModelPaths`.
+        /// Preference order:
+        /// 1. If `model` exists, return it.
+        /// 2. Search by canonical/generic model names constrained to supported model extensions.
+        /// 3. Search any file matching supported model extensions in extension priority order.
+        /// 4. `nil` if nothing suitable is discoverable.
+        public var primaryModelURL: URL? {
+            let fm = FileManager.default
+            if fm.fileExists(atPath: model.path) {
+                return model
+            }
+
+            let canonicalModelName = model.deletingPathExtension().lastPathComponent
+            let candidateNames = [canonicalModelName, "model", "tts_model"]
+                .filter { !$0.isEmpty }
+
+            if let found = findFile(matchingNameCandidates: candidateNames,
+                                    preferredExtensions: Constants.supportedModelExtensions) {
+                return found
+            }
+
+            return findFile(withExtensions: Constants.supportedModelExtensions)
+        }
+
+        /// Find a file in the same model folder matching any of the provided name candidates or extensions.
+        /// Search order:
+        /// 1. If `model` exists and matches a candidate while satisfying preferred extensions, return it.
+        /// 2. Exact filename match among preferred extensions.
+        /// 3. Filename without extension equals candidate among preferred extensions.
+        /// 4. Filename contains candidate as substring among preferred extensions.
+        /// 5. Any file matching preferred extensions (in order).
+        /// 6. If no preferred extensions are provided, repeat exact / basename / substring match against all files.
+        /// 7. `nil` if nothing found.
+        public func findFile(matchingNameCandidates names: [String], preferredExtensions exts: [String] = []) -> URL? {
+            let fm = FileManager.default
+
+            let lowerNames = Array(Set(names.map { $0.lowercased() }.filter { !$0.isEmpty }))
+            let lowerExts = Array(Set(exts.map { $0.lowercased() }.filter { !$0.isEmpty }))
+
+            func matchesPreferredExtension(_ url: URL) -> Bool {
+                lowerExts.isEmpty || lowerExts.contains(url.pathExtension.lowercased())
+            }
+
+            func exactMatch(in files: [URL]) -> URL? {
+                for candidate in lowerNames {
+                    if let found = files.first(where: { $0.lastPathComponent.lowercased() == candidate }) {
+                        return found
+                    }
+                }
+                return nil
+            }
+
+            func basenameMatch(in files: [URL]) -> URL? {
+                for candidate in lowerNames {
+                    if let found = files.first(where: { $0.deletingPathExtension().lastPathComponent.lowercased() == candidate }) {
+                        return found
+                    }
+                }
+                return nil
+            }
+
+            func containsMatch(in files: [URL]) -> URL? {
+                for candidate in lowerNames {
+                    if let found = files.first(where: { $0.lastPathComponent.lowercased().contains(candidate) }) {
+                        return found
+                    }
+                }
+                return nil
+            }
+
+            // 1. Check model itself
+            if fm.fileExists(atPath: model.path) {
+                let base = model.lastPathComponent.lowercased()
+                let baseWithoutExtension = model.deletingPathExtension().lastPathComponent.lowercased()
+                if matchesPreferredExtension(model) &&
+                    (lowerNames.contains(base) || lowerNames.contains(baseWithoutExtension)) {
+                    return model
+                }
+            }
+
+            guard let folder = modelFolder,
+                  let files = try? fm.contentsOfDirectory(at: folder, includingPropertiesForKeys: nil)
+                    .sorted(by: { $0.lastPathComponent.localizedCaseInsensitiveCompare($1.lastPathComponent) == .orderedAscending }) else {
+                return nil
+            }
+
+            let preferredFiles = lowerExts.isEmpty ? files : files.filter(matchesPreferredExtension)
+
+            // 2-4. Preferred-extension exact / basename / contains matching.
+            if let found = exactMatch(in: preferredFiles)
+                ?? basenameMatch(in: preferredFiles)
+                ?? containsMatch(in: preferredFiles) {
+                return found
+            }
+
+            // 5. Preferred extensions in priority order.
+            if !lowerExts.isEmpty {
+                for ext in lowerExts {
+                    if let found = preferredFiles.first(where: { $0.pathExtension.lowercased() == ext }) {
+                        return found
+                    }
+                }
+            }
+
+            // 6. Without preferred extensions, allow general name-based discovery.
+            if lowerExts.isEmpty,
+               let found = exactMatch(in: files)
+                ?? basenameMatch(in: files)
+                ?? containsMatch(in: files) {
+                return found
+            }
+
+            return nil
+        }
+
+        /// Find any file in model folder that matches one of the provided extensions (in order).
+        public func findFile(withExtensions exts: [String]) -> URL? {
+            let fm = FileManager.default
+            guard let folder = modelFolder,
+                                    let files = try? fm.contentsOfDirectory(at: folder, includingPropertiesForKeys: nil)
+                                        .sorted(by: { $0.lastPathComponent.localizedCaseInsensitiveCompare($1.lastPathComponent) == .orderedAscending }) else {
+                return nil
+            }
+            for ext in exts.map({ $0.lowercased() }) {
+                if let found = files.first(where: { $0.pathExtension.lowercased() == ext }) {
+                    return found
+                }
+            }
+            return nil
         }
 
         public static func installedModel(matching info: ModelInfo, engine: TTSEngineType) -> ModelPaths? {

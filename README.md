@@ -103,6 +103,32 @@ open Piper.xcworkspace
 | `mise run build <number> [simulator\|device]` | Build from command line (for CI) |
 | `mise run lint [--fix]` | Run SwiftLint |
 
+## English Voice Manifest
+
+The app prefers a bundled English-only manifest at:
+
+- `PiperApp/Resources/manifests/huggingface_piper_en.json`
+
+`VoiceLoader` checks the app bundle first, then falls back to the upstream `voices.json` index if the bundled file is unavailable.
+
+To regenerate the bundled English manifest:
+
+```bash
+python scripts/generate_english_manifest.py
+```
+
+To spot-check bundled file integrity against manifest MD5 values:
+
+```bash
+python scripts/verify_manifest_small_files_md5.py --manifest PiperApp/Resources/manifests/huggingface_piper_en.json --limit 8
+```
+
+## Tests
+
+`Project.swift` defines a `PiperTests` unit-test target with coverage for `FileManager.ModelPaths` model discovery and fallback behavior.
+
+After generating the Xcode workspace, run the `PiperTests` target from Xcode's test navigator or scheme picker.
+
 ---
 
 # 📱 Running the App

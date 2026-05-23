@@ -60,7 +60,8 @@ let project = Project(
             sources: ["\(appName)/Sources/**"],
             resources: [
                 "\(appName)/Resources/Localization/*",
-                "\(appName)/Resources/Assets.xcassets"
+                "\(appName)/Resources/Assets.xcassets",
+                "\(appName)/Resources/manifests/**"
             ],
             entitlements: .dictionary(appEntitlements),
             scripts: [],
@@ -113,6 +114,26 @@ let project = Project(
                                     defaultSettings: .recommended(excluding: [
                                         "DEFINES_MODULE"
                                     ]))
-               )
+               ),
+        .target(
+            name: "\(projectName)Tests",
+            destinations: destinations,
+            product: .unitTests,
+            bundleId: "$(PRODUCT_BUNDLE_IDENTIFIER)",
+            infoPlist: .default,
+            sources: ["\(projectName)Tests/**"],
+            dependencies: [
+                .target(name: sharedUtilsName, status: .required)
+            ],
+            settings: .settings(
+                configurations: [
+                    .debug(name: "Debug",
+                           xcconfig: "\(configsPath)/debug.xcconfig"),
+                    .release(name: "Release",
+                             xcconfig: "\(configsPath)/release.xcconfig")
+                ],
+                defaultSettings: defaultSettings
+            )
+        )
     ],
 )

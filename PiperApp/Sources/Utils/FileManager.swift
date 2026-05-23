@@ -16,7 +16,14 @@ extension FileManager {
             throw InstallError.invalidSourceFiles
         }
         
-        guard let destination = ModelPaths.installNew(engine: paths.engine) else {
+        // Create an install folder and preserve original filenames (folder-centric install)
+        guard let modelsFolder = FileManager.Constants.modelsFolderURL else {
+            throw InstallError.invalidDestinationURLs
+        }
+        let installFolder = modelsFolder.appendingPathComponent(UUID().uuidString)
+        let destinationModelURL = installFolder.appendingPathComponent(paths.model.lastPathComponent)
+        let destinationJsonURL = installFolder.appendingPathComponent(paths.json.lastPathComponent)
+        guard let destination = ModelPaths(model: destinationModelURL, json: destinationJsonURL, engine: paths.engine) else {
             throw InstallError.invalidDestinationURLs
         }
         
@@ -30,6 +37,7 @@ extension FileManager {
         }
         
         let fileManager = FileManager.default
+        // create folder and copy files preserving their original filenames
         try fileManager.createModelPathsFolder(paths: destination)
         try fileManager.copyItem(at: paths.json, to: destination.json)
         try fileManager.copyItem(at: paths.model, to: destination.model)
